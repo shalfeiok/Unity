@@ -35,12 +35,12 @@ namespace Game.Presentation.UI.Feedback
             {
                 ApplicationEventType.GemInserted => BuildGemInsertedMessage(appEvent),
                 ApplicationEventType.GemRemoved => BuildGemRemovedMessage(appEvent),
-                ApplicationEventType.PassiveAllocated => Translate("event.passive_allocated"),
-                ApplicationEventType.PassiveRefunded => Translate("event.passive_refunded"),
+                ApplicationEventType.PassiveAllocated => BuildPassiveAllocatedMessage(appEvent),
+                ApplicationEventType.PassiveRefunded => BuildPassiveRefundedMessage(appEvent),
                 ApplicationEventType.CurrencyApplied => BuildCurrencyAppliedMessage(appEvent),
                 ApplicationEventType.FlaskUsed => BuildFlaskUsedMessage(appEvent),
-                ApplicationEventType.HotbarAssigned => Translate("event.hotbar_assigned"),
-                ApplicationEventType.HotbarUnassigned => Translate("event.hotbar_unassigned"),
+                ApplicationEventType.HotbarAssigned => BuildHotbarAssignedMessage(appEvent),
+                ApplicationEventType.HotbarUnassigned => BuildHotbarUnassignedMessage(appEvent),
                 ApplicationEventType.LootPickedUp => BuildLootPickedUpMessage(appEvent),
                 _ => Translate("event.unknown")
             };
@@ -107,6 +107,41 @@ namespace Game.Presentation.UI.Feedback
                 return Translate("event.flask_used");
 
             return TranslateFormat("event.flask_used_detailed", flaskId);
+        }
+
+        private string BuildPassiveAllocatedMessage(ApplicationEvent appEvent)
+        {
+            if (!TryReadPayloadValue(appEvent, "nodeId", out var nodeId))
+                return Translate("event.passive_allocated");
+
+            return TranslateFormat("event.passive_allocated_detailed", nodeId);
+        }
+
+        private string BuildPassiveRefundedMessage(ApplicationEvent appEvent)
+        {
+            if (!TryReadPayloadValue(appEvent, "nodeId", out var nodeId))
+                return Translate("event.passive_refunded");
+
+            return TranslateFormat("event.passive_refunded_detailed", nodeId);
+        }
+
+        private string BuildHotbarAssignedMessage(ApplicationEvent appEvent)
+        {
+            if (!TryReadPayloadValue(appEvent, "skillId", out var skillId) ||
+                !TryReadPayloadValue(appEvent, "slot", out var slot))
+            {
+                return Translate("event.hotbar_assigned");
+            }
+
+            return TranslateFormat("event.hotbar_assigned_detailed", skillId, slot);
+        }
+
+        private string BuildHotbarUnassignedMessage(ApplicationEvent appEvent)
+        {
+            if (!TryReadPayloadValue(appEvent, "slot", out var slot))
+                return Translate("event.hotbar_unassigned");
+
+            return TranslateFormat("event.hotbar_unassigned_detailed", slot);
         }
 
         private string BuildLootPickedUpMessage(ApplicationEvent appEvent)

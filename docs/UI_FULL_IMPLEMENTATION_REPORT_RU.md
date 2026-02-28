@@ -19,7 +19,7 @@
 - Фласки: состояние зарядов, доступность.
 - Мини-журнал UI событий (RU): сервис `UiEventLogService` с ограничением размера и маппингом `ApplicationEvent`.
 - Синхронизация app-событий в HUD лог: `ApplicationEventLogSyncService` (дельта без повторной публикации).
-- Детализированные записи лога из payload событий (например `actionId/itemId`, `itemId/quantity/rarity`, `flaskId`, `gemId/socketIndex`).
+- Детализированные записи лога из payload событий (например `actionId/itemId`, `itemId/quantity/rarity`, `flaskId`, `gemId/socketIndex`, `nodeId`, `slot/skillId`).
 
 ### Inventory
 - Модель инвентаря (items/gems).
@@ -69,7 +69,7 @@
 - `PoeItemGeneratorTests`
 - `FlaskServiceTests`
 - `WindowServiceTests` и UI набор
-- `UiEventLogServiceTests` (включая detailed payload форматирование для currency/loot/flask/gem insert/remove)
+- `UiEventLogServiceTests` (включая detailed payload форматирование для currency/loot/flask/gem/passive/hotbar событий)
 
 ### PlayMode
 - `WindowingSmokeTests`

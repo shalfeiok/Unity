@@ -156,5 +156,54 @@ namespace Game.Tests.EditMode.UI.Feedback
             Assert.AreEqual(1, service.Entries.Count);
             Assert.AreEqual("Самоцвет support_chain извлечён из сокета #3", service.Entries[0].Message);
         }
+
+        [Test]
+        public void Publish_PassiveAllocated_WithPayload_UsesDetailedMessage()
+        {
+            var localizer = new DictionaryLocalizationService(RussianUiStrings.BuildDefault());
+            var service = new UiEventLogService(localizer);
+            var payload = new Dictionary<string, string>
+            {
+                ["nodeId"] = "notable_fire_mastery"
+            };
+
+            service.Publish(new ApplicationEvent(ApplicationEventType.PassiveAllocated, "op_9", payload));
+
+            Assert.AreEqual(1, service.Entries.Count);
+            Assert.AreEqual("Выделен пассивный узел: notable_fire_mastery", service.Entries[0].Message);
+        }
+
+        [Test]
+        public void Publish_HotbarAssigned_WithPayload_UsesDetailedMessage()
+        {
+            var localizer = new DictionaryLocalizationService(RussianUiStrings.BuildDefault());
+            var service = new UiEventLogService(localizer);
+            var payload = new Dictionary<string, string>
+            {
+                ["skillId"] = "Fireball",
+                ["slot"] = "2"
+            };
+
+            service.Publish(new ApplicationEvent(ApplicationEventType.HotbarAssigned, "op_10", payload));
+
+            Assert.AreEqual(1, service.Entries.Count);
+            Assert.AreEqual("Навык Fireball назначен в слот 2", service.Entries[0].Message);
+        }
+
+        [Test]
+        public void Publish_HotbarUnassigned_WithPayload_UsesDetailedMessage()
+        {
+            var localizer = new DictionaryLocalizationService(RussianUiStrings.BuildDefault());
+            var service = new UiEventLogService(localizer);
+            var payload = new Dictionary<string, string>
+            {
+                ["slot"] = "2"
+            };
+
+            service.Publish(new ApplicationEvent(ApplicationEventType.HotbarUnassigned, "op_11", payload));
+
+            Assert.AreEqual(1, service.Entries.Count);
+            Assert.AreEqual("Навык снят из слота 2", service.Entries[0].Message);
+        }
     }
 }
