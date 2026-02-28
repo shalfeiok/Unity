@@ -14,6 +14,8 @@ namespace Game.Presentation.UI.Windowing
 
         public bool TryCloseTopPanel() => false;
 
+        public bool HasOpenPanels() => false;
+
         public void NotifyWindowState(WindowId windowId, bool isOpen)
         {
         }

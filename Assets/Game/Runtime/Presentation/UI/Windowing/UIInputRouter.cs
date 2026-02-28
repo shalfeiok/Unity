@@ -33,6 +33,13 @@ namespace Game.Presentation.UI.Windowing
                 return false;
 
             _backNavigation.NotifyWindowState(windowId, isOpen);
+
+            if (isOpen && _contextStack.Current == InputContext.Gameplay)
+                _contextStack.Push(InputContext.UI);
+
+            if (!isOpen && _contextStack.Current == InputContext.UI && !_backNavigation.HasOpenPanels())
+                _contextStack.Pop();
+
             return true;
         }
 
@@ -48,7 +55,13 @@ namespace Game.Presentation.UI.Windowing
             }
 
             if (_contextStack.Current == InputContext.UI || _contextStack.Current == InputContext.Modal)
-                return _backNavigation.TryCloseTopPanel();
+            {
+                var closedTop = _backNavigation.TryCloseTopPanel();
+                if (closedTop && _contextStack.Current == InputContext.UI && !_backNavigation.HasOpenPanels())
+                    _contextStack.Pop();
+
+                return closedTop;
+            }
 
             return false;
         }

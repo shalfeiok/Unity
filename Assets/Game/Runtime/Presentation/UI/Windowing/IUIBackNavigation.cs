@@ -5,6 +5,7 @@ namespace Game.Presentation.UI.Windowing
         bool HasModal();
         bool TryCloseModal();
         bool TryCloseTopPanel();
+        bool HasOpenPanels();
         void NotifyWindowState(WindowId windowId, bool isOpen);
         void EnterModal();
         void ExitModal();

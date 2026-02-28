@@ -16,7 +16,7 @@ namespace Game.Tests.EditMode.UI
             Assert.True(input.TryHandleToggleKey("I"));
             Assert.True(service.IsOpen(WindowId.Inventory));
 
-            Assert.True(input.TryHandleToggleKey("I"));
+            Assert.False(input.TryHandleToggleKey("I"));
             Assert.False(service.IsOpen(WindowId.Inventory));
         }
 
@@ -30,7 +30,7 @@ namespace Game.Tests.EditMode.UI
             contexts.Push(InputContext.Modal);
             var input = new UIInputRouter(contexts, new UIHotkeyRouter(manager));
 
-            Assert.True(input.TryHandleToggleKey("I"));
+            Assert.False(input.TryHandleToggleKey("I"));
             Assert.False(service.IsOpen(WindowId.Inventory));
         }
 
@@ -222,6 +222,11 @@ namespace Game.Tests.EditMode.UI
             {
                 CloseTopPanelCalls++;
                 return _closeTopPanelResult;
+            }
+
+            public bool HasOpenPanels()
+            {
+                return LastIsOpen;
             }
 
             public void NotifyWindowState(WindowId windowId, bool isOpen)

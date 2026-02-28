@@ -25,6 +25,8 @@ namespace Game.Presentation.UI.Windowing
             return true;
         }
 
+        public bool HasOpenPanels() => _stack.Count > 0;
+
         public bool TryCloseTopPanel()
         {
             for (int i = _stack.Count - 1; i >= 0; i--)
