@@ -12,7 +12,7 @@
     - Sockets+Gems/ — линковка сокетов, skill/support gems и компиляция билда.
     - SocketService/ — операции вставки/удаления gem в сокетах.
     - Passives/ — дерево пассивов, аллокация/рефанд, правила связности и поисковый индекс по id/name/tags.
-    - Flasks/ — модель фласок и сервис зарядов/использования.
+    - Flasks/ — модель фласок, зарядов/использования и эффектов через Modifier v2.
 - Application/ — use cases, сервисы сценариев: equip/cast/generate/save.
   - Transactions/ — transaction runner, idempotency и orchestration use case pipeline.
   - Events/ — шина application-событий (publish после успешных use case операций).

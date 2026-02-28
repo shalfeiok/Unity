@@ -51,3 +51,5 @@
 - 2026-02-28: Закрыт блок application events и autosave hooks: добавлены `IApplicationEventPublisher`/`ApplicationEvent` и публикация событий из ключевых use cases (gem/passive/currency/flask/hotbar), добавлены `UILayoutAutoSaveHooks` + EditMode тесты, синхронизированы `docs/INDEX.md` и `docs/TASKS_AUDIT_REPORT.md` (обновлена статистика задач).
 
 - 2026-02-28: Реализованы оставшиеся пробелы по задачам: добавлены `PickupLootUseCase` (идемпотентный pickup + inventory update + событие `LootPickedUp`) и `PassiveTreeSearchIndex` (поиск по id/name/tags) с тестами; обновлены checklist/audit статистики.
+
+- 2026-02-28: Добавлена интеграция flask effects через Modifier v2: `FlaskDefinition.Effects`, `FlaskService.BuildEffectModifiers`, перегрузка `UseFlaskUseCase` с применением эффектов в `StatSheet`; добавлены/обновлены EditMode тесты и статистика аудита.

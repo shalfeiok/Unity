@@ -102,7 +102,7 @@
 
 ### 4.4 Flasks
 - [x] Flask charges spend/gain rules
-- [ ] Effects via Modifier v2
+- [x] Effects via Modifier v2
 
 ### 4.5 Currency Actions
 - [x] CurrencyActionDefinition + engine

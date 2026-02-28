@@ -1,11 +1,13 @@
 using System.Collections.Generic;
 using Game.Application.Poe.UseCases;
 using Game.Application.Transactions;
+using Game.Domain.Modifiers;
 using Game.Domain.Poe.Crafting;
 using Game.Domain.Poe.Flasks;
 using Game.Domain.Poe.Items;
 using Game.Domain.Poe.Passives;
 using Game.Domain.Rng;
+using Game.Domain.Stats;
 using Game.Infrastructure.Economy;
 using NUnit.Framework;
 
@@ -62,6 +64,29 @@ namespace Game.Tests.EditMode.App
 
             Assert.True(useCase.Execute("op_flask_1", flask));
             Assert.AreEqual(10, service.GetCharges(flask.Id));
+        }
+
+        [Test]
+        public void UseFlaskUseCase_AppliesModifierEffectsToStatSheet()
+        {
+            var service = new FlaskService();
+            var flask = new FlaskDefinition
+            {
+                Id = "quicksilver",
+                MaxCharges = 20,
+                ChargesPerUse = 10,
+                Duration = 4,
+                Effects = { new FlaskEffectDefinition { Stat = StatId.MoveSpeed, Bucket = ModifierBucket.Increased, Value = 0.2f } }
+            };
+            service.Initialize(flask);
+
+            var stats = new StatSheet();
+            stats.SetBase(StatId.MoveSpeed, 100f);
+
+            var useCase = new UseFlaskUseCase(new TransactionRunner(), service);
+
+            Assert.True(useCase.Execute("op_flask_effect_1", flask, stats, sourceId: 9901));
+            Assert.AreEqual(120f, stats.GetFinal(StatId.MoveSpeed));
         }
     }
 }

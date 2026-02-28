@@ -8,8 +8,8 @@
 
 ## Сводная статистика
 - Всего проверено пунктов: **64**
-- ✅ Выполнено: **57**
-- ⚠️ Реализовано частично / иначе: **5**
+- ✅ Выполнено: **58**
+- ⚠️ Реализовано частично / иначе: **4**
 - ❌ Не выполнено: **2**
 
 ---
@@ -55,7 +55,7 @@
 - ✅ Passive tree allocation/respec connectivity есть.
 - ✅ Добавлен PassiveTreeSearchIndex с поиском по id/name/tags.
 - ✅ Flask charges rules есть.
-- ⚠️ Flask effects via Modifier v2 в явном интеграционном виде отсутствуют.
+- ✅ Flask effects интегрированы через Modifier v2 (`FlaskEffectDefinition` + build/apply в use case).
 - ✅ Currency actions + deterministic craft RNG + ledger entry есть.
 
 ## 5) Application UseCases + Transactions

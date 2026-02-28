@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using Game.Domain.Modifiers;
 
 namespace Game.Domain.Poe.Flasks
 {
@@ -29,6 +30,21 @@ namespace Game.Domain.Poe.Flasks
             int next = current + amount;
             if (next > maxCharges) next = maxCharges;
             _charges[flaskId] = next;
+        }
+
+        public IReadOnlyList<Modifier> BuildEffectModifiers(FlaskDefinition flask, int sourceId)
+        {
+            if (flask?.Effects == null || flask.Effects.Count == 0)
+                return System.Array.Empty<Modifier>();
+
+            var result = new List<Modifier>(flask.Effects.Count);
+            for (int i = 0; i < flask.Effects.Count; i++)
+            {
+                var effect = flask.Effects[i];
+                result.Add(new Modifier(effect.Stat, effect.Bucket, effect.Value, sourceId, effect.ScopeTag));
+            }
+
+            return result;
         }
     }
 }

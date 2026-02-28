@@ -1,4 +1,6 @@
+using Game.Domain.Modifiers;
 using Game.Domain.Poe.Flasks;
+using Game.Domain.Stats;
 using NUnit.Framework;
 
 namespace Game.Tests.EditMode.Poe
@@ -26,6 +28,28 @@ namespace Game.Tests.EditMode.Poe
             service.GainCharges(flask.Id, 100, flask.MaxCharges);
 
             Assert.AreEqual(20, service.GetCharges(flask.Id));
+        }
+
+        [Test]
+        public void BuildEffectModifiers_ReturnsModifierV2Set()
+        {
+            var flask = new FlaskDefinition
+            {
+                Id = "granite",
+                Effects =
+                {
+                    new FlaskEffectDefinition { Stat = StatId.Armor, Bucket = ModifierBucket.Add, Value = 100f },
+                    new FlaskEffectDefinition { Stat = StatId.MoveSpeed, Bucket = ModifierBucket.Increased, Value = 0.1f }
+                }
+            };
+
+            var service = new FlaskService();
+            var mods = service.BuildEffectModifiers(flask, sourceId: 777);
+
+            Assert.AreEqual(2, mods.Count);
+            Assert.AreEqual(StatId.Armor, mods[0].Stat);
+            Assert.AreEqual(777, mods[0].SourceId);
+            Assert.AreEqual(ModifierBucket.Increased, mods[1].Bucket);
         }
     }
 }
