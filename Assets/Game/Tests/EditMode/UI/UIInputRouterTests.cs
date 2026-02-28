@@ -129,6 +129,26 @@ namespace Game.Tests.EditMode.UI
             Assert.False(service.IsOpen(WindowId.Inventory));
         }
 
+
+        [Test]
+        public void OnModalOpened_AndOnModalClosed_TrackModalDepthAndContext()
+        {
+            var contexts = new InputContextStack();
+            var back = new BackNavigationStub(false, false, false);
+            var input = new UIInputRouter(
+                contexts,
+                new UIHotkeyRouter(new WindowManager(new WindowService(new WindowRegistry()))),
+                backNavigation: back);
+
+            input.OnModalOpened();
+            Assert.AreEqual(InputContext.Modal, contexts.Current);
+            Assert.AreEqual(1, back.EnterModalCalls);
+
+            input.OnModalClosed();
+            Assert.AreEqual(InputContext.Gameplay, contexts.Current);
+            Assert.AreEqual(1, back.ExitModalCalls);
+        }
+
         private sealed class ConstantResolver : IUIHotkeyResolver
         {
             private readonly UIHotkey _hotkey;
@@ -156,6 +176,8 @@ namespace Game.Tests.EditMode.UI
             public int CloseModalCalls { get; private set; }
             public int CloseTopPanelCalls { get; private set; }
             public int NotifyCalls { get; private set; }
+            public int EnterModalCalls { get; private set; }
+            public int ExitModalCalls { get; private set; }
             public WindowId LastWindowId { get; private set; }
             public bool LastIsOpen { get; private set; }
 
@@ -185,6 +207,16 @@ namespace Game.Tests.EditMode.UI
                 NotifyCalls++;
                 LastWindowId = windowId;
                 LastIsOpen = isOpen;
+            }
+
+            public void EnterModal()
+            {
+                EnterModalCalls++;
+            }
+
+            public void ExitModal()
+            {
+                ExitModalCalls++;
             }
         }
     }

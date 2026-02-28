@@ -46,5 +46,18 @@ namespace Game.Presentation.UI.Windowing
 
             return false;
         }
+
+        public void OnModalOpened()
+        {
+            _contextStack.Push(InputContext.Modal);
+            _backNavigation.EnterModal();
+        }
+
+        public void OnModalClosed()
+        {
+            _backNavigation.ExitModal();
+            if (_contextStack.Current == InputContext.Modal)
+                _contextStack.Pop();
+        }
     }
 }

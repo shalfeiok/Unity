@@ -83,3 +83,4 @@
 - 2026-02-28: Добавлен back-navigation контракт `IUIBackNavigation` (+ `NullUIBackNavigation`) и логика `UIInputRouter.TryHandleEscape()` с приоритетом закрытия modal -> top panel; расширены EditMode тесты UI input/router.
 - 2026-02-28: Добавлена реализация `WindowStackBackNavigation` и интеграция уведомлений о состоянии окон из `UIInputRouter`; Esc теперь может закрывать фактически верхнюю панель по стеку открытий.
 - 2026-02-28: `UIHotkeyRouter` переведён на state-aware toggle (out `windowId`/`isOpen`), `UIInputRouter` уведомляет back-navigation только после успешного toggling; расширены EditMode тесты на notify/failure-path.
+- 2026-02-28: Добавлены lifecycle-хуки `UIInputRouter.OnModalOpened/OnModalClosed`; контракт back-navigation расширен методами `EnterModal/ExitModal`, синхронизированы тесты и стековая реализация.

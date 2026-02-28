@@ -1,6 +1,7 @@
 # SUMMARY_IMPLEMENTATION_REPORT
 
 ## Что добавлено в этом обновлении
+- В `UIInputRouter` добавлен lifecycle API для модалок: `OnModalOpened()` / `OnModalClosed()` с синхронизацией `InputContextStack` и back-navigation depth.
 - `UIHotkeyRouter` получил атомарный `TryToggle(..., out windowId, out isOpen)`, чтобы `UIInputRouter` уведомлял back-navigation только после успешного toggling с фактическим состоянием окна.
 - Добавлена production-реализация `WindowStackBackNavigation`, которая ведёт стек открытых окон и закрывает верхнюю панель по Esc.
 - Добавлен контракт back-navigation (`IUIBackNavigation`) и реализация `NullUIBackNavigation`; `UIInputRouter.TryHandleEscape()` реализует приоритет: сначала закрытие модалки, затем верхней панели.

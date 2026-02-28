@@ -17,5 +17,13 @@ namespace Game.Presentation.UI.Windowing
         public void NotifyWindowState(WindowId windowId, bool isOpen)
         {
         }
+
+        public void EnterModal()
+        {
+        }
+
+        public void ExitModal()
+        {
+        }
     }
 }

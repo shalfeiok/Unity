@@ -33,8 +33,8 @@ namespace Game.Tests.EditMode.UI
         public void ModalDepth_PushAndClose_Works()
         {
             var back = new WindowStackBackNavigation(new WindowService(new WindowRegistry()));
-            back.PushModal();
-            back.PushModal();
+            back.EnterModal();
+            back.EnterModal();
 
             Assert.True(back.HasModal());
             Assert.True(back.TryCloseModal());

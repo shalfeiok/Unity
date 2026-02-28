@@ -62,6 +62,12 @@ namespace Game.Presentation.UI.Windowing
                 _stack.RemoveAt(idx);
         }
 
-        public void PushModal() => _modalDepth++;
+        public void EnterModal() => _modalDepth++;
+
+        public void ExitModal()
+        {
+            if (_modalDepth > 0)
+                _modalDepth--;
+        }
     }
 }
