@@ -1,0 +1,22 @@
+# SUMMARY_IMPLEMENTATION_REPORT
+
+## Что добавлено в этом обновлении
+- Добавлен новый PlayMode smoke тест `UITogglesSmokeTest` с покрытием UI hotkey toggle-потока для окон I/C/P/S/K/O/M в текущем runtime-каталоге окон.
+- Добавлен smoke сценарий «ядро vertical slice» через существующие use case и UI-сервисы:
+  - назначение скилла в hotbar;
+  - аллокация узлов passive tree;
+  - preview + commit currency craft операции.
+- Сформирован комплект enterprise-отчётов верхнего уровня:
+  - `ARCHITECTURE_OVERVIEW.md`
+  - `SYSTEM_DEPENDENCY_GRAPH.md`
+  - `BALANCE_GUIDELINES.md`
+  - `CHANGELOG.md`
+
+## Как тестировать
+1. Запустить Unity Test Runner для PlayMode тестов.
+2. Убедиться, что `UITogglesSmokeTest` проходит полностью.
+3. Проверить, что существующие PlayMode smoke тесты по UI и craft не регрессировали.
+
+## Ограничения текущего snapshot
+- Тесты валидируют сервисный/доменный слой и window-service orchestration, но не загружают реальные Unity-сцены (`SCN_Hub`, `SCN_RiftInstance`) в рамках этого изменения.
+- Полная визуальная иерархия prefab/scene из master-спеки требует отдельного asset pass в Unity Editor.
