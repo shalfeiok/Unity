@@ -8,35 +8,35 @@
 ---
 
 ## 0) Preflight
-- [ ] Прочитаны: `docs/INDEX.md`, `docs/CURSOR_MASTER_PROMPT.md`
-- [ ] Прочитаны каноны: `specs/AAA_ARCHITECTURE_CANON.md`, `specs/UI_WINDOWING_FRAMEWORK.md`, `specs/UI_IMPLEMENTATION_PLAN_WINDOWING.md`
-- [ ] Прочитаны PoE каноны: `specs/POE_CORE_REQUIREMENTS.md` + детальные спеки
-- [ ] Прочитан D3 loot: `specs/LOOT_SYSTEM_D3.md`
-- [ ] Созданы asmdef слоёв, зависимости корректны (Presentation→Application→Domain, Domain без Unity)
-- [ ] Добавлен минимальный “fail fast” тест: Domain assembly не содержит Unity references
+- [x] Прочитаны: `docs/INDEX.md`, `docs/CURSOR_MASTER_PROMPT.md`
+- [x] Прочитаны каноны: `specs/AAA_ARCHITECTURE_CANON.md`, `specs/UI_WINDOWING_FRAMEWORK.md`, `specs/UI_IMPLEMENTATION_PLAN_WINDOWING.md`
+- [x] Прочитаны PoE каноны: `specs/POE_CORE_REQUIREMENTS.md` + детальные спеки
+- [x] Прочитан D3 loot: `specs/LOOT_SYSTEM_D3.md`
+- [x] Созданы asmdef слоёв, зависимости корректны (Presentation→Application→Domain, Domain без Unity)
+- [x] Добавлен минимальный “fail fast” тест: Domain assembly не содержит Unity references
 
 ---
 
 ## 1) AAA Foundation (Этап 07)
 ### 1.1 Deterministic sim
-- [ ] Fixed tick (SimTime + порядок систем)
-- [ ] RNG streams (Combat/Loot/AI/World/Craft)
-- [ ] Запрет UnityEngine.Random в Domain (линтер/ревью/тест)
+- [x] Fixed tick (SimTime + порядок систем)
+- [x] RNG streams (Combat/Loot/AI/World/Craft)
+- [x] Запрет UnityEngine.Random в Domain (линтер/ревью/тест)
 
 ### 1.2 Modifier Algebra v2
-- [ ] Bucket model: Base/Add/Increased/More/Conversion/GainAsExtra/Cap
-- [ ] Provenance: источник каждого модификатора (items/passives/gems/flasks/effects)
-- [ ] DamageBreakdown: Base→Added→Increased→More→Conversion→GainAsExtra→Crit→Mitigation→Final
+- [x] Bucket model: Base/Add/Increased/More/Conversion/GainAsExtra/Cap
+- [x] Provenance: источник каждого модификатора (items/passives/gems/flasks/effects)
+- [x] DamageBreakdown: Base→Added→Increased→More→Conversion→GainAsExtra→Crit→Mitigation→Final
 
 ### 1.3 Perf
-- [ ] PerfBudget (maxEnemies/maxProjectiles/maxLootLabels/maxUiRefreshPerFrame)
+- [x] PerfBudget (maxEnemies/maxProjectiles/maxLootLabels/maxUiRefreshPerFrame)
 - [ ] Pools: projectiles/floating texts/loot actors/tooltips/toasts
-- [ ] UIRefreshScheduler batching
+- [x] UIRefreshScheduler batching
 
 ### 1.4 Tests (EditMode)
-- [ ] DeterminismRngTests
-- [ ] ModifierAlgebraTests (increased/more/conversion order)
-- [ ] DamageBreakdownTests
+- [x] DeterminismRngTests
+- [x] ModifierAlgebraTests (increased/more/conversion order)
+- [x] DamageBreakdownTests
 
 ---
 
@@ -44,109 +44,109 @@
 ### 2.1 Core
 - [ ] UIRoot single canvas + EventSystem + TMP
 - [ ] WindowTemplate.prefab (Chrome/Content/Overlay)
-- [ ] WindowManager + WindowRegistry + IWindowService
+- [x] WindowManager + WindowRegistry + IWindowService
 
 ### 2.2 Behavior
-- [ ] DragMove (anchoredPosition, canvas scale aware, clamp safe-area)
-- [ ] Focus/z-order bring-to-front
+- [x] DragMove (anchoredPosition, canvas scale aware, clamp safe-area)
+- [x] Focus/z-order bring-to-front
 - [ ] Modal blocker (click-through запрещён)
-- [ ] Resize (min/max)
-- [ ] Dock/Snap (edge snap минимум)
+- [x] Resize (min/max)
+- [x] Dock/Snap (edge snap минимум)
 
 ### 2.3 Persistence
-- [ ] UILayoutState (pos/size/dock/collapsed/pinned/zIndex/activeTab/customJson)
-- [ ] Save/restore layout (JSON)
+- [x] UILayoutState (pos/size/dock/collapsed/pinned/zIndex/activeTab/customJson)
+- [x] Save/restore layout (JSON)
 - [ ] Layout autosave on end-drag/end-resize/close
 
 ### 2.4 Input & DnD
-- [ ] InputContextStack (Gameplay/UI/ChatTyping/Modal)
-- [ ] DragDropService (ItemRef/GemRef/SkillRef/CurrencyRef)
-- [ ] VirtualizedListView + pooling
+- [x] InputContextStack (Gameplay/UI/ChatTyping/Modal)
+- [x] DragDropService (ItemRef/GemRef/SkillRef/CurrencyRef)
+- [x] VirtualizedListView + pooling
 
 ### 2.5 Tests (PlayMode)
-- [ ] WindowingSmokeTests: открыть 20 окон, drag, save, reload
+- [x] WindowingSmokeTests: открыть 20 окон, drag, save, reload
 
 ---
 
 ## 3) D3 Loot loop (в мир)
-- [ ] LootGenerator (D3 профили)
-- [ ] World loot actors + pooled labels
-- [ ] ALT show toggle + highlight beams/colors (текстом/простыми объектами)
-- [ ] Pickup transaction + inventory update
+- [x] LootGenerator (D3 профили)
+- [x] World loot actors + pooled labels
+- [x] ALT show toggle + highlight beams/colors (текстом/простыми объектами)
+- [x] Pickup transaction + inventory update
 - [ ] Tests: loot smoke
 
 ---
 
 ## 4) PoE Core (Этап 09)
 ### 4.1 Itemization
-- [ ] ItemBaseDefinition + implicit
-- [ ] ModDefinition prefix/suffix + tiers + ilvl gating + group conflicts
-- [ ] PoeItemGenerator deterministic (seed)
-- [ ] ModPoolValidator (Editor+CI)
+- [x] ItemBaseDefinition + implicit
+- [x] ModDefinition prefix/suffix + tiers + ilvl gating + group conflicts
+- [x] PoeItemGenerator deterministic (seed)
+- [x] ModPoolValidator (Editor+CI)
 
 ### 4.2 Sockets/Links + Gems
-- [ ] SocketModel + LinkGroups
-- [ ] SkillGemDefinition + SupportGemDefinition + GemInstance
-- [ ] SupportEffectKind enum (каталог)
-- [ ] SkillBuildCompiler:
-  - [ ] supports только в linkGroup
-  - [ ] rejected supports with reasons
-  - [ ] stable order (Order then GemId)
-  - [ ] Explain breakdown
+- [x] SocketModel + LinkGroups
+- [x] SkillGemDefinition + SupportGemDefinition + GemInstance
+- [x] SupportEffectKind enum (каталог)
+- [x] SkillBuildCompiler:
+  - [x] supports только в linkGroup
+  - [x] rejected supports with reasons
+  - [x] stable order (Order then GemId)
+  - [x] Explain breakdown
 
 ### 4.3 Passive Tree
-- [ ] PassiveTreeDefinition graph (nodes/edges/positions)
-- [ ] Allocation rules (adjacency)
-- [ ] Respec connectivity validator
-- [ ] Search index (name/tag)
+- [x] PassiveTreeDefinition graph (nodes/edges/positions)
+- [x] Allocation rules (adjacency)
+- [x] Respec connectivity validator
+- [x] Search index (name/tag)
 
 ### 4.4 Flasks
-- [ ] Flask charges spend/gain rules
-- [ ] Effects via Modifier v2
+- [x] Flask charges spend/gain rules
+- [x] Effects via Modifier v2
 
 ### 4.5 Currency Actions
-- [ ] CurrencyActionDefinition + engine
-- [ ] Operations MVP: reroll/add/remove/bias/sockets/colors/links/quality/(corrupt optional)
-- [ ] deterministic Craft RNG stream
-- [ ] Ledger entry on apply
+- [x] CurrencyActionDefinition + engine
+- [x] Operations MVP: reroll/add/remove/bias/sockets/colors/links/quality/(corrupt optional)
+- [x] deterministic Craft RNG stream
+- [x] Ledger entry on apply
 
 ### 4.6 Tests
-- [ ] SkillBuildCompilerTests
-- [ ] PoeItemGeneratorTests
-- [ ] PassiveTreeRulesTests
-- [ ] CurrencyActionEngineTests
+- [x] SkillBuildCompilerTests
+- [x] PoeItemGeneratorTests
+- [x] PassiveTreeRulesTests
+- [x] CurrencyActionEngineTests
 
 ---
 
 ## 5) Application UseCases + Transactions
-- [ ] TransactionRunner begin/validate/apply/publish/commit + idempotency
-- [ ] InsertGemUseCase / RemoveGemUseCase
-- [ ] Allocate/Respec Passive UseCases
-- [ ] ApplyCurrencyActionUseCase (+ ledger)
-- [ ] UseFlaskUseCase
-- [ ] UI events published for all changes
+- [x] TransactionRunner begin/validate/apply/publish/commit + idempotency
+- [x] InsertGemUseCase / RemoveGemUseCase
+- [x] Allocate/Respec Passive UseCases
+- [x] ApplyCurrencyActionUseCase (+ ledger)
+- [x] UseFlaskUseCase
+- [x] UI events published for all changes
 
 ---
 
 ## 6) UI окна PoE
-- [ ] Inventory/Character окна работают в WindowTemplate
-- [ ] Socket Inspector: drag&drop gems ↔ sockets + applied/rejected list
-- [ ] Skills Window: compiled skills from gems + hotbar assign
-- [ ] Passive Tree Window: zoom/pan/search/preview/allocate/respec
-- [ ] Craft Window: apply actions + confirm irreversible
-- [ ] Flask Belt HUD: 1..5 charges + hotkeys
+- [x] Inventory/Character окна работают в WindowTemplate
+- [x] Socket Inspector: drag&drop gems ↔ sockets + applied/rejected list
+- [x] Skills Window: compiled skills from gems + hotbar assign
+- [x] Passive Tree Window: zoom/pan/search/preview/allocate/respec
+- [x] Craft Window: apply actions + confirm irreversible
+- [x] Flask Belt HUD: 1..5 charges + hotkeys
 
 PlayMode smoke:
-- [ ] GemDragDropSmokeTests
-- [ ] PassiveTreeAllocateSmokeTests
-- [ ] CraftApplySmokeTests
+- [x] GemDragDropSmokeTests
+- [x] PassiveTreeAllocateSmokeTests
+- [x] CraftApplySmokeTests
 
 ---
 
 ## 7) Документация/прогресс
-- [ ] На каждый коммит добавлена строка в `docs/PROGRESS.md`
-- [ ] `docs/INDEX.md` и `docs/FILE_MAP.md` обновлены при добавлении файлов
-- [ ] Новые спеки добавлены в `docs/INDEX.md`
+- [x] На каждый коммит добавлена строка в `docs/PROGRESS.md`
+- [x] `docs/INDEX.md` и `docs/FILE_MAP.md` обновлены при добавлении файлов
+- [x] Новые спеки добавлены в `docs/INDEX.md`
 
 ---
 

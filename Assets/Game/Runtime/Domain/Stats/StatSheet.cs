@@ -1,62 +1,36 @@
-using System;
 using System.Collections.Generic;
+using Game.Domain.Combat;
+using Game.Domain.Modifiers;
 
 namespace Game.Domain.Stats
 {
-    /// <summary>
-    /// Minimal stat sheet skeleton. Expand with soft caps, breakdown and pooling.
-    /// Keep allocation-free in hot paths.
-    /// </summary>
     public sealed class StatSheet
     {
         private readonly Dictionary<StatId, float> _base = new();
-        private readonly List<Modifier> _mods = new();
+        private readonly ModifierSet _modifiers = new();
 
         public void SetBase(StatId stat, float value) => _base[stat] = value;
 
         public float GetBase(StatId stat) => _base.TryGetValue(stat, out var v) ? v : 0f;
 
-        public void AddModifier(Modifier m) => _mods.Add(m);
+        public void AddModifier(in Modifier modifier) => _modifiers.Add(modifier);
 
-        public void RemoveAllFromSource(int sourceId)
+        public void RemoveAllFromSource(int sourceId) => _modifiers.RemoveAllFromSource(sourceId);
+
+        public float GetFinal(StatId stat) => _modifiers.Compute(stat, GetBase(stat)).FinalValue;
+
+        public DamageBreakdown GetDamageBreakdown(StatId stat)
         {
-            for (int i = _mods.Count - 1; i >= 0; i--)
-                if (_mods[i].SourceId == sourceId) _mods.RemoveAt(i);
+            return GetDamageBreakdown(stat, critChance: 0f, critMultiplier: 1.5f, mitigation: 0f);
         }
 
-        public float GetFinal(StatId stat)
+        public DamageBreakdown GetDamageBreakdown(StatId stat, float critChance, float critMultiplier, float mitigation)
         {
-            float value = GetBase(stat);
-
-            float addFlat = 0f;
-            float addPct = 0f;
-            float mul = 1f;
-            bool hasOverride = false;
-            float overrideValue = 0f;
-
-            for (int i = 0; i < _mods.Count; i++)
-            {
-                ref readonly var m = ref _mods[i];
-                if (m.Stat != stat) continue;
-
-                switch (m.Op)
-                {
-                    case ModifierOp.AddFlat: addFlat += m.Value; break;
-                    case ModifierOp.AddPercent: addPct += m.Value; break;
-                    case ModifierOp.Multiply: mul *= (1f + m.Value); break;
-                    case ModifierOp.Override:
-                        hasOverride = true;
-                        overrideValue = m.Value; // TODO: add priority if needed
-                        break;
-                }
-            }
-
-            value += addFlat;
-            value *= (1f + addPct);
-            value *= mul;
-            if (hasOverride) value = overrideValue;
-
-            return value;
+            var baseValue = GetBase(stat);
+            var computation = _modifiers.Compute(stat, baseValue);
+            return new DamageBreakdown(computation, baseValue, critChance, critMultiplier, mitigation);
         }
+
+        public ModifierComputation GetComputation(StatId stat) => _modifiers.Compute(stat, GetBase(stat));
     }
 }
