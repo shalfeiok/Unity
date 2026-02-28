@@ -1,6 +1,7 @@
 # SUMMARY_IMPLEMENTATION_REPORT
 
 ## Что добавлено в этом обновлении
+- Добавлена production-реализация `WindowStackBackNavigation`, которая ведёт стек открытых окон и закрывает верхнюю панель по Esc.
 - Добавлен контракт back-navigation (`IUIBackNavigation`) и реализация `NullUIBackNavigation`; `UIInputRouter.TryHandleEscape()` реализует приоритет: сначала закрытие модалки, затем верхней панели.
 - Добавлен production-класс `UIInputRouter` + `DefaultUIHotkeyResolver` для прямой маршрутизации клавиш в hotkey intents с учётом `InputContext` (включая блокировку при `Modal`).
 - Добавлен новый PlayMode smoke тест `UITogglesSmokeTest` с покрытием UI hotkey toggle-потока через production-класс `UIHotkeyRouter` (I/C/P/S/K/O/M -> Inventory/Character/PassiveTree/Skills/Craft/Atlas).

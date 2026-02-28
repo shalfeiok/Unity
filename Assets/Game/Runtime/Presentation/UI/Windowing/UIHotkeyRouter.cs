@@ -25,5 +25,10 @@ namespace Game.Presentation.UI.Windowing
         {
             return _bindings.TryGetWindow(hotkey, out windowId);
         }
+
+        public bool IsOpen(WindowId windowId)
+        {
+            return _windowManager.IsOpen(windowId);
+        }
     }
 }

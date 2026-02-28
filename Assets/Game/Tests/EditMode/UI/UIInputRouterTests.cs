@@ -76,6 +76,26 @@ namespace Game.Tests.EditMode.UI
             Assert.AreEqual(1, back.CloseTopPanelCalls);
         }
 
+
+        [Test]
+        public void TryHandleEscape_WithWindowStackBackNavigation_ClosesLastToggledPanel()
+        {
+            var registry = new WindowRegistry();
+            registry.Register(WindowId.Inventory, _ => { });
+            var service = new WindowService(registry);
+            var manager = new WindowManager(service);
+            var contexts = new InputContextStack();
+            contexts.Push(InputContext.UI);
+            var back = new WindowStackBackNavigation(service);
+            var input = new UIInputRouter(contexts, new UIHotkeyRouter(manager), backNavigation: back);
+
+            Assert.True(input.TryHandleToggleKey("I"));
+            Assert.True(service.IsOpen(WindowId.Inventory));
+
+            Assert.True(input.TryHandleEscape());
+            Assert.False(service.IsOpen(WindowId.Inventory));
+        }
+
         private sealed class BackNavigationStub : IUIBackNavigation
         {
             private readonly bool _hasModal;
@@ -104,6 +124,10 @@ namespace Game.Tests.EditMode.UI
             {
                 CloseTopPanelCalls++;
                 return _closeTopPanelResult;
+            }
+
+            public void NotifyWindowState(WindowId windowId, bool isOpen)
+            {
             }
         }
     }

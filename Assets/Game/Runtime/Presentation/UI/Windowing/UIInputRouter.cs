@@ -29,7 +29,15 @@ namespace Game.Presentation.UI.Windowing
             if (!_hotkeyResolver.TryResolve(key, out var hotkey))
                 return false;
 
-            return _hotkeyRouter.TryToggle(hotkey);
+            if (!_hotkeyRouter.TryResolveWindow(hotkey, out var windowId))
+                return false;
+
+            if (!_hotkeyRouter.TryToggle(hotkey))
+                return false;
+
+            var isOpen = _hotkeyRouter.IsOpen(windowId);
+            _backNavigation.NotifyWindowState(windowId, isOpen);
+            return true;
         }
 
         public bool TryHandleEscape()
