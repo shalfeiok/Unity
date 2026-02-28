@@ -69,7 +69,7 @@
 - `PoeItemGeneratorTests`
 - `FlaskServiceTests`
 - `WindowServiceTests` и UI набор
-- `UiEventLogServiceTests` (включая detailed payload форматирование для currency/loot/flask/gem/passive/hotbar событий)
+- `UiEventLogServiceTests` (включая detailed payload форматирование для currency/loot/flask/gem/passive/hotbar событий + fallback-покрытие при неполном payload)
 
 ### PlayMode
 - `WindowingSmokeTests`

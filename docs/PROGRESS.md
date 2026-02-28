@@ -74,3 +74,4 @@
 - 2026-02-28: Расширен `UiEventLogService` детализированными сообщениями для gem insert/remove (payload `gemId` + `socketIndex`), добавлены RU-ключи локализации и EditMode тесты на detailed/fallback сценарии.
 - 2026-02-28: Расширено тестовое покрытие `UiEventLogService` для detailed payload-сообщений `FlaskUsed` и `GemRemoved` (RU formatting + event payload mapping).
 - 2026-02-28: `UiEventLogService` расширен detailed RU-сообщениями для passive/hotbar событий (allocate/refund/assign/unassign) с payload-aware fallback; добавлены EditMode тесты на форматирование.
+- 2026-02-28: Доведено покрытие `UiEventLogServiceTests` до полной пары событий passive (allocate/refund) и добавлен explicit fallback-тест для `HotbarAssigned` при неполном payload.
