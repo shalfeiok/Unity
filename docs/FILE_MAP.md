@@ -10,11 +10,12 @@
   - Poe/ — PoE-ориентированные модели itemization/skills/passives/flasks/crafting.
     - Items/ — базы, пулы модов, генератор предметов, селектор и роллы.
     - Sockets+Gems/ — линковка сокетов, skill/support gems и компиляция билда.
+    - SocketService/ — операции вставки/удаления gem в сокетах.
     - Passives/ — дерево пассивов, аллокация/рефанд и правила связности.
     - Flasks/ — модель фласок и сервис зарядов/использования.
 - Application/ — use cases, сервисы сценариев: equip/cast/generate/save.
   - Transactions/ — transaction runner, idempotency и orchestration use case pipeline.
-  - Poe/UseCases/ — PoE сценарии: gem/passive/flask/currency operations.
+  - Poe/UseCases/ — PoE сценарии: gem/passive/flask/currency operations (вкл. InsertGem/RemoveGem).
 - Presentation/ — Unity сцены, MonoBehaviours, UI Views, Input, NavMesh, VFX/Anim.
   - UI/Windowing/ — базовый windowing framework и планировщик UI refresh.
     - Interactions/ — drag/focus/modal/resize/dock и layout persistence helpers.
