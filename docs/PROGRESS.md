@@ -45,3 +45,4 @@
 - 2026-02-28: Добавлены PlayMode WindowingSmokeTests: smoke на open/toggle окон и save/load layout с проверкой drag-позиции.
 - 2026-02-28: Добавлен RefundPassiveNodeUseCase (respec) в Application слой с EditMode тестом на соблюдение правил связности дерева при возврате нод.
 - 2026-02-28: Добавлен application use case AssignSkillToHotbarUseCase (assign/unassign с TransactionRunner idempotency) и EditMode тесты.
+- 2026-02-28: Добавлены DamageBreakdownTests (покрытие стадий Added/Increased/More/Conversion) и синхронизирован CURSOR_CHECKLIST по выполненным пунктам foundation/windowing/poe/ui/test.
