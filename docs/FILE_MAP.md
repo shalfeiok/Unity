@@ -19,6 +19,8 @@
 - Presentation/ — Unity сцены, MonoBehaviours, UI Views, Input, NavMesh, VFX/Anim.
   - UI/Windowing/ — базовый windowing framework и планировщик UI refresh.
   - UI/Windows/ — прикладные окна (Inventory/Character/SocketInspector и др.).
+    - Skills/ — compiled skills panel и данные для биндинга на hotbar.
+  - UI/Hud/ — HUD сервисы (hotbar bindings и боевые индикаторы).
     - Interactions/ — drag/focus/modal/resize/dock и layout persistence helpers.
     - Input/ — input context stack, drag&drop payload service, virtualized list view.
   - Common/ — инфраструктурные клиентские утилиты (например, object pooling).
