@@ -40,3 +40,4 @@
 - 2026-02-28: Добавлен базовый UI слой окон Inventory/Character и SocketInspectorService (dragdrop gems, remove to inventory, compile applied/rejected supports) + EditMode тесты.
 - 2026-02-28: Добавлен блок Skills Panel + Hotbar binding: SkillsPanelState/Entry/Service (отображение compiled skills и rejected reasons), HotbarAssignmentService (assign/unassign/snapshot) и EditMode тесты.
 - 2026-02-28: Добавлен блок Passive Tree Window: состояние окна (zoom/pan/search/highlight/preview), сервис интеракций и EditMode тесты на clamp/панораму/поиск/preview.
+- 2026-02-28: Добавлены Craft Window и Flask Belt HUD базовые сервисы/состояния: предпросмотр и применение currency action в окне крафта, отображение charges/usability для flask slots, плюс EditMode тесты.

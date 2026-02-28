@@ -21,7 +21,9 @@
   - UI/Windows/ — прикладные окна (Inventory/Character/SocketInspector и др.).
     - Skills/ — compiled skills panel и данные для биндинга на hotbar.
     - PassiveTree/ — состояние и сервисы окна дерева пассивов (zoom/pan/search/preview).
+    - Craft/ — состояние и сервисы окна применения currency actions.
   - UI/Hud/ — HUD сервисы (hotbar bindings и боевые индикаторы).
+    - Flasks/ — flask belt HUD состояние и обновление charges/usability.
     - Interactions/ — drag/focus/modal/resize/dock и layout persistence helpers.
     - Input/ — input context stack, drag&drop payload service, virtualized list view.
   - Common/ — инфраструктурные клиентские утилиты (например, object pooling).
