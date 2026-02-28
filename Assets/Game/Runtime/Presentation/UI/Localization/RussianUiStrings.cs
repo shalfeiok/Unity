@@ -26,7 +26,18 @@ namespace Game.Presentation.UI.Localization
                 ["tooltip.section.rejected_supports"] = "Отклонённые поддержки",
                 ["tooltip.skill.applied_line"] = "{0} (приоритет {1})",
                 ["tooltip.skill.rejected_line"] = "{0}: {1}; отсутствуют теги: {2}",
-                ["ui.error.precondition"] = "Действие недоступно: условия не выполнены"
+                ["ui.error.precondition"] = "Действие недоступно: условия не выполнены",
+                ["craft.apply.success"] = "Крафт успешно применён: {0}",
+                ["event.gem_inserted"] = "Самоцвет вставлен",
+                ["event.gem_removed"] = "Самоцвет извлечён",
+                ["event.passive_allocated"] = "Пассивный узел выделен",
+                ["event.passive_refunded"] = "Пассивный узел возвращён",
+                ["event.currency_applied"] = "Валюта применена к предмету",
+                ["event.flask_used"] = "Фласка использована",
+                ["event.hotbar_assigned"] = "Навык назначен на панель",
+                ["event.hotbar_unassigned"] = "Навык снят с панели",
+                ["event.loot_picked_up"] = "Предмет поднят",
+                ["event.unknown"] = "Игровое событие"
             };
         }
     }

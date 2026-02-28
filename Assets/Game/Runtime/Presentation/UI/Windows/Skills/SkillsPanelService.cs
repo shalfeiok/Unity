@@ -1,10 +1,18 @@
 using System.Collections.Generic;
 using Game.Domain.Poe.Gems;
+using Game.Presentation.UI.Tooltips;
 
 namespace Game.Presentation.UI.Windows.Skills
 {
     public sealed class SkillsPanelService
     {
+        private readonly SkillExplainTooltipBuilder _tooltipBuilder;
+
+        public SkillsPanelService(SkillExplainTooltipBuilder tooltipBuilder = null)
+        {
+            _tooltipBuilder = tooltipBuilder;
+        }
+
         public SkillsPanelState BuildFromCompiledSkills(IReadOnlyList<CompiledSkill> compiledSkills)
         {
             var state = new SkillsPanelState();
@@ -14,7 +22,8 @@ namespace Game.Presentation.UI.Windows.Skills
                 var compiled = compiledSkills[i];
                 var entry = new SkillsPanelEntry
                 {
-                    SkillId = compiled.SkillId
+                    SkillId = compiled.SkillId,
+                    ExplainTooltip = _tooltipBuilder?.Build(compiled)
                 };
 
                 for (int s = 0; s < compiled.AppliedSupportGemIds.Count; s++)

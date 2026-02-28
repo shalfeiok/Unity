@@ -5,6 +5,8 @@ using Game.Domain.Poe.Crafting;
 using Game.Domain.Poe.Items;
 using Game.Domain.Rng;
 using Game.Infrastructure.Economy;
+using Game.Presentation.UI.Feedback;
+using Game.Presentation.UI.Localization;
 using Game.Presentation.UI.Windows.Craft;
 using NUnit.Framework;
 
@@ -20,7 +22,9 @@ namespace Game.Tests.EditMode.UI.Windows
                 runner,
                 new CurrencyActionEngine(new XorShift32Rng(123)),
                 new TransactionLedger());
-            var service = new CraftWindowService(useCase);
+            var loc = new DictionaryLocalizationService(RussianUiStrings.BuildDefault());
+            var eventLog = new UiEventLogService(loc);
+            var service = new CraftWindowService(useCase, loc, eventLog);
             var state = new CraftWindowState();
 
             var itemBase = new ItemBaseDefinition { Id = "base_1", ItemClass = "Sword", RequiredItemLevel = 1 };
@@ -41,6 +45,35 @@ namespace Game.Tests.EditMode.UI.Windows
             Assert.AreEqual(1, state.CurrentModIds.Count);
             Assert.False(state.HasPreview);
             Assert.AreEqual(0, state.PreviewModIds.Count);
+            Assert.AreEqual("", state.LastErrorMessage);
+            StringAssert.Contains("Крафт успешно применён", state.LastResultMessage);
+            Assert.AreEqual(1, eventLog.Entries.Count);
+        }
+
+        [Test]
+        public void Apply_WhenUseCaseFails_SetsLocalizedError()
+        {
+            var runner = new TransactionRunner();
+            var useCase = new ApplyCurrencyActionUseCase(
+                runner,
+                new CurrencyActionEngine(new XorShift32Rng(123)),
+                new TransactionLedger());
+            var loc = new DictionaryLocalizationService(RussianUiStrings.BuildDefault());
+            var eventLog = new UiEventLogService(loc);
+            var service = new CraftWindowService(useCase, loc, eventLog);
+
+            var itemBase = new ItemBaseDefinition { Id = "base_1", ItemClass = "Sword", RequiredItemLevel = 1 };
+            var state = new CraftWindowState();
+            var current = new GeneratedPoeItem(itemBase, 80, new List<GeneratedPoeMod>());
+            var action = new CurrencyActionDefinition { Id = "remove_prefix", Kind = CurrencyActionKind.RemoveRandomPrefix, Cost = 1 };
+            var pool = new List<ModDefinition>();
+
+            bool ok = service.Apply(state, "op_craft_fail_1", action, current, pool, out _);
+
+            Assert.False(ok);
+            Assert.AreEqual("Действие недоступно: условия не выполнены", state.LastErrorMessage);
+            Assert.AreEqual(string.Empty, state.LastResultMessage);
+            Assert.AreEqual(1, eventLog.Entries.Count);
         }
     }
 }

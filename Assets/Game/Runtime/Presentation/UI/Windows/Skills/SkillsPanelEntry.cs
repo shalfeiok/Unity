@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using Game.Presentation.UI.Tooltips;
 
 namespace Game.Presentation.UI.Windows.Skills
 {
@@ -7,5 +8,6 @@ namespace Game.Presentation.UI.Windows.Skills
         public string SkillId;
         public List<string> AppliedSupports = new();
         public List<string> RejectedSupportReasons = new();
+        public TooltipModel ExplainTooltip;
     }
 }

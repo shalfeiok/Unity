@@ -9,5 +9,7 @@ namespace Game.Presentation.UI.Windows.Craft
         public string SelectedCurrencyActionId = string.Empty;
         public List<string> PreviewModIds = new();
         public bool HasPreview;
+        public string LastErrorMessage = string.Empty;
+        public string LastResultMessage = string.Empty;
     }
 }

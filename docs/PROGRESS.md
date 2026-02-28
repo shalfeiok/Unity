@@ -67,3 +67,4 @@
 - 2026-02-28: Добавлен базовый RU localization/tooltip слой UI: `DictionaryLocalizationService` + `RussianUiStrings`, `ItemTooltipBuilder` и EditMode тесты локализации/подсказок для предметов.
 
 - 2026-02-28: Добавлен `SkillExplainTooltipBuilder` (RU-подсказки по explain-профилю скилла: применённые/отклонённые supports и missing tags), расширен словарь `RussianUiStrings`, добавлен EditMode тест билдера.
+- 2026-02-28: Добавлен UI event log слой (`UiEventLogService`) с RU-локализацией сообщений ApplicationEvent, интеграция в `CraftWindowService` (success/error feedback), а также tooltip-привязка explain-профиля в `SkillsPanelService`; обновлены EditMode тесты и синхронизирован audit-статус по частично заблокированным Unity asset-пунктам.

@@ -2,16 +2,25 @@ using System.Collections.Generic;
 using Game.Application.Poe.UseCases;
 using Game.Domain.Poe.Crafting;
 using Game.Domain.Poe.Items;
+using Game.Presentation.UI.Feedback;
+using Game.Presentation.UI.Localization;
 
 namespace Game.Presentation.UI.Windows.Craft
 {
     public sealed class CraftWindowService
     {
         private readonly ApplyCurrencyActionUseCase _useCase;
+        private readonly ILocalizationService _loc;
+        private readonly UiEventLogService _eventLog;
 
-        public CraftWindowService(ApplyCurrencyActionUseCase useCase)
+        public CraftWindowService(
+            ApplyCurrencyActionUseCase useCase,
+            ILocalizationService localizationService = null,
+            UiEventLogService eventLog = null)
         {
             _useCase = useCase;
+            _loc = localizationService;
+            _eventLog = eventLog;
         }
 
         public void SelectAction(CraftWindowState state, string actionId)
@@ -36,7 +45,13 @@ namespace Game.Presentation.UI.Windows.Craft
             out GeneratedPoeItem updated)
         {
             var ok = _useCase.Execute(operationId, action, item, pool, out updated);
-            if (!ok) return false;
+            if (!ok)
+            {
+                state.LastErrorMessage = Translate("ui.error.precondition");
+                state.LastResultMessage = string.Empty;
+                _eventLog?.AddError(state.LastErrorMessage);
+                return false;
+            }
 
             state.CurrentModIds.Clear();
             for (int i = 0; i < updated.Mods.Count; i++)
@@ -44,7 +59,20 @@ namespace Game.Presentation.UI.Windows.Craft
 
             state.HasPreview = false;
             state.PreviewModIds.Clear();
+            state.LastErrorMessage = string.Empty;
+            state.LastResultMessage = TranslateFormat("craft.apply.success", action.Id);
+            _eventLog?.AddInfo(state.LastResultMessage);
             return true;
+        }
+
+        private string Translate(string key)
+        {
+            return _loc == null ? key : _loc.Translate(key);
+        }
+
+        private string TranslateFormat(string key, params object[] args)
+        {
+            return _loc == null ? key : _loc.TranslateFormat(key, args);
         }
     }
 }
