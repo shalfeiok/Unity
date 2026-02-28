@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using Game.Application.Events;
 using Game.Presentation.UI.Feedback;
 using Game.Presentation.UI.Localization;
@@ -57,6 +58,41 @@ namespace Game.Tests.EditMode.UI.Feedback
 
             Assert.AreEqual(1, service.Entries.Count);
             Assert.AreEqual("event.currency_applied", service.Entries[0].Message);
+        }
+
+        [Test]
+        public void Publish_CurrencyApplied_WithPayload_UsesDetailedMessage()
+        {
+            var localizer = new DictionaryLocalizationService(RussianUiStrings.BuildDefault());
+            var service = new UiEventLogService(localizer);
+            var payload = new Dictionary<string, string>
+            {
+                ["actionId"] = "chaos_orb",
+                ["itemId"] = "sword_01"
+            };
+
+            service.Publish(new ApplicationEvent(ApplicationEventType.CurrencyApplied, "op_3", payload));
+
+            Assert.AreEqual(1, service.Entries.Count);
+            Assert.AreEqual("Валюта chaos_orb применена к предмету sword_01", service.Entries[0].Message);
+        }
+
+        [Test]
+        public void Publish_LootPickedUp_WithPayload_UsesDetailedMessage()
+        {
+            var localizer = new DictionaryLocalizationService(RussianUiStrings.BuildDefault());
+            var service = new UiEventLogService(localizer);
+            var payload = new Dictionary<string, string>
+            {
+                ["itemId"] = "amulet_rare",
+                ["quantity"] = "2",
+                ["rarity"] = "Rare"
+            };
+
+            service.Publish(new ApplicationEvent(ApplicationEventType.LootPickedUp, "op_4", payload));
+
+            Assert.AreEqual(1, service.Entries.Count);
+            Assert.AreEqual("Поднят предмет amulet_rare x2 (Rare)", service.Entries[0].Message);
         }
     }
 }

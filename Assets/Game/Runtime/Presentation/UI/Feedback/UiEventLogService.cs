@@ -37,11 +37,11 @@ namespace Game.Presentation.UI.Feedback
                 ApplicationEventType.GemRemoved => Translate("event.gem_removed"),
                 ApplicationEventType.PassiveAllocated => Translate("event.passive_allocated"),
                 ApplicationEventType.PassiveRefunded => Translate("event.passive_refunded"),
-                ApplicationEventType.CurrencyApplied => Translate("event.currency_applied"),
-                ApplicationEventType.FlaskUsed => Translate("event.flask_used"),
+                ApplicationEventType.CurrencyApplied => BuildCurrencyAppliedMessage(appEvent),
+                ApplicationEventType.FlaskUsed => BuildFlaskUsedMessage(appEvent),
                 ApplicationEventType.HotbarAssigned => Translate("event.hotbar_assigned"),
                 ApplicationEventType.HotbarUnassigned => Translate("event.hotbar_unassigned"),
-                ApplicationEventType.LootPickedUp => Translate("event.loot_picked_up"),
+                ApplicationEventType.LootPickedUp => BuildLootPickedUpMessage(appEvent),
                 _ => Translate("event.unknown")
             };
 
@@ -61,6 +61,54 @@ namespace Game.Presentation.UI.Feedback
         private string Translate(string key)
         {
             return _loc == null ? key : _loc.Translate(key);
+        }
+
+        private string TranslateFormat(string key, params object[] args)
+        {
+            return _loc == null ? key : _loc.TranslateFormat(key, args);
+        }
+
+        private string BuildCurrencyAppliedMessage(ApplicationEvent appEvent)
+        {
+            if (!TryReadPayloadValue(appEvent, "actionId", out var actionId) ||
+                !TryReadPayloadValue(appEvent, "itemId", out var itemId))
+            {
+                return Translate("event.currency_applied");
+            }
+
+            return TranslateFormat("event.currency_applied_detailed", actionId, itemId);
+        }
+
+        private string BuildFlaskUsedMessage(ApplicationEvent appEvent)
+        {
+            if (!TryReadPayloadValue(appEvent, "flaskId", out var flaskId))
+                return Translate("event.flask_used");
+
+            return TranslateFormat("event.flask_used_detailed", flaskId);
+        }
+
+        private string BuildLootPickedUpMessage(ApplicationEvent appEvent)
+        {
+            if (!TryReadPayloadValue(appEvent, "itemId", out var itemId) ||
+                !TryReadPayloadValue(appEvent, "quantity", out var quantity) ||
+                !TryReadPayloadValue(appEvent, "rarity", out var rarity))
+            {
+                return Translate("event.loot_picked_up");
+            }
+
+            return TranslateFormat("event.loot_picked_up_detailed", itemId, quantity, rarity);
+        }
+
+        private static bool TryReadPayloadValue(ApplicationEvent appEvent, string key, out string value)
+        {
+            value = string.Empty;
+            if (appEvent.Payload == null)
+                return false;
+
+            if (!appEvent.Payload.TryGetValue(key, out value))
+                return false;
+
+            return !string.IsNullOrWhiteSpace(value);
         }
     }
 }

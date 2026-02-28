@@ -33,10 +33,13 @@ namespace Game.Presentation.UI.Localization
                 ["event.passive_allocated"] = "Пассивный узел выделен",
                 ["event.passive_refunded"] = "Пассивный узел возвращён",
                 ["event.currency_applied"] = "Валюта применена к предмету",
+                ["event.currency_applied_detailed"] = "Валюта {0} применена к предмету {1}",
                 ["event.flask_used"] = "Фласка использована",
+                ["event.flask_used_detailed"] = "Фласка использована: {0}",
                 ["event.hotbar_assigned"] = "Навык назначен на панель",
                 ["event.hotbar_unassigned"] = "Навык снят с панели",
                 ["event.loot_picked_up"] = "Предмет поднят",
+                ["event.loot_picked_up_detailed"] = "Поднят предмет {0} x{1} ({2})",
                 ["event.unknown"] = "Игровое событие"
             };
         }

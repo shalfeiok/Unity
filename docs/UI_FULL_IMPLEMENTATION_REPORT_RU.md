@@ -19,6 +19,7 @@
 - Фласки: состояние зарядов, доступность.
 - Мини-журнал UI событий (RU): сервис `UiEventLogService` с ограничением размера и маппингом `ApplicationEvent`.
 - Синхронизация app-событий в HUD лог: `ApplicationEventLogSyncService` (дельта без повторной публикации).
+- Детализированные записи лога из payload событий (например `actionId/itemId`, `itemId/quantity/rarity`, `flaskId`).
 
 ### Inventory
 - Модель инвентаря (items/gems).
