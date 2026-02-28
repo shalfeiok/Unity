@@ -13,6 +13,8 @@
     - Passives/ — дерево пассивов, аллокация/рефанд и правила связности.
     - Flasks/ — модель фласок и сервис зарядов/использования.
 - Application/ — use cases, сервисы сценариев: equip/cast/generate/save.
+  - Transactions/ — transaction runner, idempotency и orchestration use case pipeline.
+  - Poe/UseCases/ — PoE сценарии: gem/passive/flask/currency operations.
 - Presentation/ — Unity сцены, MonoBehaviours, UI Views, Input, NavMesh, VFX/Anim.
   - UI/Windowing/ — базовый windowing framework и планировщик UI refresh.
     - Interactions/ — drag/focus/modal/resize/dock и layout persistence helpers.
@@ -23,6 +25,7 @@
   - Config/ — конфиги производительности (PerfBudget settings/provider).
   - Persistence/ — JSON storage и репозитории сохранения layout/state.
   - DataPipeline/ — валидация таблиц данных и контентных пулов.
+  - Economy/ — append-only ledger и audit trail экономики.
 
 ## Assets/Game/Data
 ScriptableObject definitions будут в `Assets/Game/Runtime/Presentation/Data` (cs),

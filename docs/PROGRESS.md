@@ -34,3 +34,5 @@
 - 2026-02-28: Реализован блок PoE gems/links: SocketModel/LinkGroup, SkillGemDefinition/SupportGemDefinition/GemInstance, SkillBuildCompiler (applied/rejected + deterministic ordering) и EditMode тесты.
 - 2026-02-28: Реализован блок Passive Tree: PassiveTreeDefinition, PassiveTreeService (allocate/refund with connectivity checks), PassiveTreeValidator и EditMode тесты.
 - 2026-02-28: Реализован блок Flasks: FlaskDefinition, FlaskService (charges/use/gain clamp) и EditMode тесты.
+- 2026-02-28: Реализован блок PoE currency actions: CurrencyActionDefinition/CurrencyActionEngine (reroll/add/remove с детерминированным craft stream) и append-only TransactionLedger + EditMode тесты.
+- 2026-02-28: Реализован Application слой транзакций: TransactionRunner (idempotency) и PoE use cases (ApplyCurrencyAction, AllocatePassiveNode, UseFlask) + EditMode тесты.
