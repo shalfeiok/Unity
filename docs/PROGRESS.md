@@ -46,3 +46,4 @@
 - 2026-02-28: Добавлен RefundPassiveNodeUseCase (respec) в Application слой с EditMode тестом на соблюдение правил связности дерева при возврате нод.
 - 2026-02-28: Добавлен application use case AssignSkillToHotbarUseCase (assign/unassign с TransactionRunner idempotency) и EditMode тесты.
 - 2026-02-28: Добавлены DamageBreakdownTests (покрытие стадий Added/Increased/More/Conversion) и синхронизирован CURSOR_CHECKLIST по выполненным пунктам foundation/windowing/poe/ui/test.
+- 2026-02-28: Добавлен fail-fast guard тест DomainAssemblyGuardTests: проверка noEngineReferences в Game.Domain.asmdef и запрет UnityEngine/UnityEngine.Random в Domain коде.

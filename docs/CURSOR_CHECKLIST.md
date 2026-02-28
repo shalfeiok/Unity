@@ -13,7 +13,7 @@
 - [ ] Прочитаны PoE каноны: `specs/POE_CORE_REQUIREMENTS.md` + детальные спеки
 - [ ] Прочитан D3 loot: `specs/LOOT_SYSTEM_D3.md`
 - [x] Созданы asmdef слоёв, зависимости корректны (Presentation→Application→Domain, Domain без Unity)
-- [ ] Добавлен минимальный “fail fast” тест: Domain assembly не содержит Unity references
+- [x] Добавлен минимальный “fail fast” тест: Domain assembly не содержит Unity references
 
 ---
 
@@ -21,7 +21,7 @@
 ### 1.1 Deterministic sim
 - [x] Fixed tick (SimTime + порядок систем)
 - [x] RNG streams (Combat/Loot/AI/World/Craft)
-- [ ] Запрет UnityEngine.Random в Domain (линтер/ревью/тест)
+- [x] Запрет UnityEngine.Random в Domain (линтер/ревью/тест)
 
 ### 1.2 Modifier Algebra v2
 - [x] Bucket model: Base/Add/Increased/More/Conversion/GainAsExtra/Cap
