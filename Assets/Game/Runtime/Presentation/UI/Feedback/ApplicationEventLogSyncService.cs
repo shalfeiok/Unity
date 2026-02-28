@@ -1,23 +1,24 @@
 using Game.Application.Events;
+using System;
 
 namespace Game.Presentation.UI.Feedback
 {
     public sealed class ApplicationEventLogSyncService
     {
-        private readonly InMemoryApplicationEventPublisher _publisher;
+        private readonly IApplicationEventReader _eventReader;
         private readonly UiEventLogService _eventLog;
         private int _lastSyncedIndex;
 
-        public ApplicationEventLogSyncService(InMemoryApplicationEventPublisher publisher, UiEventLogService eventLog)
+        public ApplicationEventLogSyncService(IApplicationEventReader eventReader, UiEventLogService eventLog)
         {
-            _publisher = publisher;
-            _eventLog = eventLog;
+            _eventReader = eventReader ?? throw new ArgumentNullException(nameof(eventReader));
+            _eventLog = eventLog ?? throw new ArgumentNullException(nameof(eventLog));
             _lastSyncedIndex = 0;
         }
 
         public int SyncNewEvents()
         {
-            var events = _publisher.Events;
+            var events = _eventReader.Events;
             if (_lastSyncedIndex >= events.Count)
                 return 0;
 

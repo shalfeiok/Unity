@@ -2,11 +2,23 @@ using Game.Application.Events;
 using Game.Presentation.UI.Feedback;
 using Game.Presentation.UI.Localization;
 using NUnit.Framework;
+using System;
 
 namespace Game.Tests.EditMode.UI.Feedback
 {
     public sealed class ApplicationEventLogSyncServiceTests
     {
+        [Test]
+        public void Ctor_NullDependencies_Throws()
+        {
+            var localizer = new DictionaryLocalizationService(RussianUiStrings.BuildDefault());
+            var eventLog = new UiEventLogService(localizer);
+            var publisher = new InMemoryApplicationEventPublisher();
+
+            Assert.Throws<ArgumentNullException>(() => new ApplicationEventLogSyncService(null, eventLog));
+            Assert.Throws<ArgumentNullException>(() => new ApplicationEventLogSyncService(publisher, null));
+        }
+
         [Test]
         public void SyncNewEvents_PublishesOnlyDelta()
         {

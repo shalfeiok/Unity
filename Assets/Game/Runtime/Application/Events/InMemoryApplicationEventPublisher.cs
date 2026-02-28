@@ -2,7 +2,7 @@ using System.Collections.Generic;
 
 namespace Game.Application.Events
 {
-    public sealed class InMemoryApplicationEventPublisher : IApplicationEventPublisher
+    public sealed class InMemoryApplicationEventPublisher : IApplicationEventPublisher, IApplicationEventReader
     {
         private readonly List<ApplicationEvent> _events = new();
 
