@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using Game.Presentation.UI.Windowing;
 using NUnit.Framework;
 
@@ -6,7 +7,7 @@ namespace Game.Tests.EditMode.UI
     public sealed class UIHotkeyRouterTests
     {
         [Test]
-        public void TryResolveWindow_MapsAtlasAndCraftHotkeys()
+        public void TryResolveWindow_UsesDefaultBindings_ForAtlasAndCraftHotkeys()
         {
             var router = new UIHotkeyRouter(new WindowManager(new WindowService(new WindowRegistry())));
 
@@ -25,6 +26,20 @@ namespace Game.Tests.EditMode.UI
         {
             var router = new UIHotkeyRouter(new WindowManager(new WindowService(new WindowRegistry())));
             Assert.False(router.TryToggle(UIHotkey.None));
+        }
+
+        [Test]
+        public void TryResolveWindow_UsesInjectedBindings()
+        {
+            var customBindings = new DefaultUIHotkeyBindings(
+                new Dictionary<UIHotkey, WindowId>
+                {
+                    [UIHotkey.Inventory] = WindowId.Atlas
+                });
+            var router = new UIHotkeyRouter(new WindowManager(new WindowService(new WindowRegistry())), customBindings);
+
+            Assert.True(router.TryResolveWindow(UIHotkey.Inventory, out var resolved));
+            Assert.AreEqual(WindowId.Atlas, resolved);
         }
     }
 }

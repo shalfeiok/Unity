@@ -2,6 +2,7 @@
 
 ## Что добавлено в этом обновлении
 - Добавлен новый PlayMode smoke тест `UITogglesSmokeTest` с покрытием UI hotkey toggle-потока через production-класс `UIHotkeyRouter` (I/C/P/S/K/O/M -> Inventory/Character/PassiveTree/Skills/Craft/Atlas).
+- Введён data-driven контракт `IUIHotkeyBindings` и реализация `DefaultUIHotkeyBindings`, чтобы hotkey mapping был инъецируемым и тестируемым без правки роутера.
 - Добавлен smoke сценарий «ядро vertical slice» через существующие use case и UI-сервисы:
   - назначение скилла в hotbar;
   - аллокация узлов passive tree;

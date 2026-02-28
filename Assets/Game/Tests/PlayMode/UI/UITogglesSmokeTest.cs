@@ -22,33 +22,36 @@ namespace Game.Tests.PlayMode.UI
             var registry = new WindowRegistry();
             var service = new WindowService(registry);
             var manager = new WindowManager(service);
-            var hotkeys = new UIHotkeyRouter(manager);
+            var bindings = new DefaultUIHotkeyBindings();
+            var hotkeys = new UIHotkeyRouter(manager, bindings);
 
-            var toggleCases = new Dictionary<UIHotkey, WindowId>
+            var toggleHotkeys = new[]
             {
-                [UIHotkey.Inventory] = WindowId.Inventory,
-                [UIHotkey.Character] = WindowId.Character,
-                [UIHotkey.PassiveTree] = WindowId.PassiveTree,
-                [UIHotkey.Skills] = WindowId.Skills,
-                [UIHotkey.SkillcraftForge] = WindowId.Craft,
-                [UIHotkey.CraftingBench] = WindowId.Craft,
-                [UIHotkey.Atlas] = WindowId.Atlas
+                UIHotkey.Inventory,
+                UIHotkey.Character,
+                UIHotkey.PassiveTree,
+                UIHotkey.Skills,
+                UIHotkey.SkillcraftForge,
+                UIHotkey.CraftingBench,
+                UIHotkey.Atlas
             };
 
-            foreach (var testCase in toggleCases)
+            foreach (var hotkey in toggleHotkeys)
             {
+                Assert.True(bindings.TryGetWindow(hotkey, out var expectedWindow));
+
                 bool visible = false;
-                registry.Register(testCase.Value, state => visible = state);
+                registry.Register(expectedWindow, state => visible = state);
 
-                Assert.True(hotkeys.TryResolveWindow(testCase.Key, out var resolved));
-                Assert.AreEqual(testCase.Value, resolved);
+                Assert.True(hotkeys.TryResolveWindow(hotkey, out var resolved));
+                Assert.AreEqual(expectedWindow, resolved);
 
-                Assert.True(hotkeys.TryToggle(testCase.Key));
-                Assert.True(service.IsOpen(testCase.Value));
+                Assert.True(hotkeys.TryToggle(hotkey));
+                Assert.True(service.IsOpen(expectedWindow));
                 Assert.True(visible);
 
-                Assert.True(hotkeys.TryToggle(testCase.Key));
-                Assert.False(service.IsOpen(testCase.Value));
+                Assert.True(hotkeys.TryToggle(hotkey));
+                Assert.False(service.IsOpen(expectedWindow));
             }
         }
 

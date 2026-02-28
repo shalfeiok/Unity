@@ -1,31 +1,19 @@
-using System.Collections.Generic;
-
 namespace Game.Presentation.UI.Windowing
 {
     public sealed class UIHotkeyRouter
     {
-        private static readonly IReadOnlyDictionary<UIHotkey, WindowId> _toggleMap =
-            new Dictionary<UIHotkey, WindowId>
-            {
-                [UIHotkey.Inventory] = WindowId.Inventory,
-                [UIHotkey.Character] = WindowId.Character,
-                [UIHotkey.PassiveTree] = WindowId.PassiveTree,
-                [UIHotkey.Skills] = WindowId.Skills,
-                [UIHotkey.SkillcraftForge] = WindowId.Craft,
-                [UIHotkey.CraftingBench] = WindowId.Craft,
-                [UIHotkey.Atlas] = WindowId.Atlas
-            };
-
         private readonly WindowManager _windowManager;
+        private readonly IUIHotkeyBindings _bindings;
 
-        public UIHotkeyRouter(WindowManager windowManager)
+        public UIHotkeyRouter(WindowManager windowManager, IUIHotkeyBindings bindings = null)
         {
             _windowManager = windowManager;
+            _bindings = bindings ?? new DefaultUIHotkeyBindings();
         }
 
         public bool TryToggle(UIHotkey hotkey)
         {
-            if (!_toggleMap.TryGetValue(hotkey, out var windowId))
+            if (!_bindings.TryGetWindow(hotkey, out var windowId))
                 return false;
 
             _windowManager.Toggle(windowId);
@@ -34,7 +22,7 @@ namespace Game.Presentation.UI.Windowing
 
         public bool TryResolveWindow(UIHotkey hotkey, out WindowId windowId)
         {
-            return _toggleMap.TryGetValue(hotkey, out windowId);
+            return _bindings.TryGetWindow(hotkey, out windowId);
         }
     }
 }
