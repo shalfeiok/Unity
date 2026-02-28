@@ -24,33 +24,24 @@ namespace Game.Tests.PlayMode.UI
             var manager = new WindowManager(service);
             var bindings = new DefaultUIHotkeyBindings();
             var hotkeys = new UIHotkeyRouter(manager, bindings);
+            var input = new UIInputRouter(new InputContextStack(), hotkeys);
 
-            var toggleHotkeys = new[]
-            {
-                UIHotkey.Inventory,
-                UIHotkey.Character,
-                UIHotkey.PassiveTree,
-                UIHotkey.Skills,
-                UIHotkey.SkillcraftForge,
-                UIHotkey.CraftingBench,
-                UIHotkey.Atlas
-            };
+            var toggleKeys = new[] { "I", "C", "P", "S", "K", "O", "M" };
+            var resolver = new DefaultUIHotkeyResolver();
 
-            foreach (var hotkey in toggleHotkeys)
+            foreach (var key in toggleKeys)
             {
+                Assert.True(resolver.TryResolve(key, out var hotkey));
                 Assert.True(bindings.TryGetWindow(hotkey, out var expectedWindow));
 
                 bool visible = false;
                 registry.Register(expectedWindow, state => visible = state);
 
-                Assert.True(hotkeys.TryResolveWindow(hotkey, out var resolved));
-                Assert.AreEqual(expectedWindow, resolved);
-
-                Assert.True(hotkeys.TryToggle(hotkey));
+                Assert.True(input.TryHandleToggleKey(key));
                 Assert.True(service.IsOpen(expectedWindow));
                 Assert.True(visible);
 
-                Assert.True(hotkeys.TryToggle(hotkey));
+                Assert.True(input.TryHandleToggleKey(key));
                 Assert.False(service.IsOpen(expectedWindow));
             }
         }

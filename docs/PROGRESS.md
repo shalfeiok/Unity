@@ -79,3 +79,4 @@
 
 - 2026-02-28: Улучшен hotkey слой UI: добавлены `UIHotkey`/`UIHotkeyRouter`, расширен `WindowId` значением `Atlas`, обновлён PlayMode `UITogglesSmokeTest` на production-маршрутизацию и добавлены EditMode тесты `UIHotkeyRouterTests`.
 - 2026-02-28: Refactor hotkeys в data-driven стиль: добавлены `IUIHotkeyBindings` и `DefaultUIHotkeyBindings`, `UIHotkeyRouter` переведён на инъекцию биндингов; обновлены EditMode/PlayMode тесты под новую точку расширения.
+- 2026-02-28: Добавлен `UIInputRouter` и `DefaultUIHotkeyResolver`; hotkey smoke переведён на обработку реальных key-intents (`I/C/P/S/K/O/M`) через input-layer с учётом `InputContext.Modal`.
