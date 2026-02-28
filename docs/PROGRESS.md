@@ -29,3 +29,5 @@
 - 2026-02-28: Добавлены window interactions: WindowDragMove (canvas-scale aware), WindowFocusController, WindowModalBlocker, WindowResize, WindowDockSnap + EditMode тесты на drag/resize/snap/focus/modal.
 - 2026-02-28: Добавлены UILayoutState/UILayoutPersistence и Infrastructure persistence слой (JsonStorage + UILayoutRepository) с тестом save/load roundtrip.
 - 2026-02-28: Добавлены InputContextStack (Gameplay/UI/ChatTyping/Modal), DragDropService (ItemRef/GemRef/SkillRef/CurrencyRef), VirtualizedListView<T> и EditMode тесты.
+- 2026-02-28: Реализован старт D3-like loot loop: Domain LootGenerator/LootDrop/LootRarity (детерминированный drop), Presentation LootWorldActor/LootLabel и LootAltToggle + EditMode тесты по детерминизму и ALT visibility.
+- 2026-02-28: Начат блок PoE itemization: ItemBaseDefinition/ModDefinition, ModPoolSelector, PoeItemGenerator и ModPoolValidator + EditMode тесты (caps 3/3, deterministic seed, ilvl gating, duplicate mod ids).

@@ -6,15 +6,19 @@
   - Rng/ — детерминированные RNG и stream-провайдеры.
   - Modifiers/ — algebra v2 (bucket-агрегация, provenance, conversion ordering).
   - Combat/ — breakdown-модели (например, DamageBreakdown).
+  - Loot/ — генерация drop-таблиц и детерминированный world loot pipeline.
+  - Poe/ — PoE-ориентированные модели itemization/skills/passives/flasks/crafting.
 - Application/ — use cases, сервисы сценариев: equip/cast/generate/save.
 - Presentation/ — Unity сцены, MonoBehaviours, UI Views, Input, NavMesh, VFX/Anim.
   - UI/Windowing/ — базовый windowing framework и планировщик UI refresh.
     - Interactions/ — drag/focus/modal/resize/dock и layout persistence helpers.
     - Input/ — input context stack, drag&drop payload service, virtualized list view.
   - Common/ — инфраструктурные клиентские утилиты (например, object pooling).
+  - World/ — world-actors для лута и других in-world presentation сущностей.
 - Infrastructure/ — IO, serialization, logging adapters, профилировщики.
   - Config/ — конфиги производительности (PerfBudget settings/provider).
   - Persistence/ — JSON storage и репозитории сохранения layout/state.
+  - DataPipeline/ — валидация таблиц данных и контентных пулов.
 
 ## Assets/Game/Data
 ScriptableObject definitions будут в `Assets/Game/Runtime/Presentation/Data` (cs),
