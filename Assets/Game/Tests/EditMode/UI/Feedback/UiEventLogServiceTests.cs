@@ -123,5 +123,38 @@ namespace Game.Tests.EditMode.UI.Feedback
             Assert.AreEqual(1, service.Entries.Count);
             Assert.AreEqual("Фласка использована", service.Entries[0].Message);
         }
+
+        [Test]
+        public void Publish_FlaskUsed_WithPayload_UsesDetailedMessage()
+        {
+            var localizer = new DictionaryLocalizationService(RussianUiStrings.BuildDefault());
+            var service = new UiEventLogService(localizer);
+            var payload = new Dictionary<string, string>
+            {
+                ["flaskId"] = "life_flask_tier3"
+            };
+
+            service.Publish(new ApplicationEvent(ApplicationEventType.FlaskUsed, "op_7", payload));
+
+            Assert.AreEqual(1, service.Entries.Count);
+            Assert.AreEqual("Фласка использована: life_flask_tier3", service.Entries[0].Message);
+        }
+
+        [Test]
+        public void Publish_GemRemoved_WithPayload_UsesDetailedMessage()
+        {
+            var localizer = new DictionaryLocalizationService(RussianUiStrings.BuildDefault());
+            var service = new UiEventLogService(localizer);
+            var payload = new Dictionary<string, string>
+            {
+                ["gemId"] = "support_chain",
+                ["socketIndex"] = "3"
+            };
+
+            service.Publish(new ApplicationEvent(ApplicationEventType.GemRemoved, "op_8", payload));
+
+            Assert.AreEqual(1, service.Entries.Count);
+            Assert.AreEqual("Самоцвет support_chain извлечён из сокета #3", service.Entries[0].Message);
+        }
     }
 }

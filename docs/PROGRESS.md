@@ -72,3 +72,4 @@
 - 2026-02-28: Уточнён контракт шины событий для UI: добавлен `IApplicationEventReader`, `InMemoryApplicationEventPublisher` реализует его; `ApplicationEventLogSyncService` отвязан от concrete publisher (зависимость на интерфейс) + добавлены guard-тесты на null-зависимости.
 - 2026-02-28: Улучшен `UiEventLogService`: локализованные детализированные сообщения по payload (`CurrencyApplied`, `LootPickedUp`, `FlaskUsed`) с fallback на базовые ключи; добавлены EditMode тесты на detailed RU-formatting.
 - 2026-02-28: Расширен `UiEventLogService` детализированными сообщениями для gem insert/remove (payload `gemId` + `socketIndex`), добавлены RU-ключи локализации и EditMode тесты на detailed/fallback сценарии.
+- 2026-02-28: Расширено тестовое покрытие `UiEventLogService` для detailed payload-сообщений `FlaskUsed` и `GemRemoved` (RU formatting + event payload mapping).
