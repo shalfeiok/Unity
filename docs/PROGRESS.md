@@ -63,3 +63,5 @@
 - 2026-02-28: Закрыт preflight-пункт аудита: добавлен `docs/PREFLIGHT_READ_LOG.md` и синхронизированы `CURSOR_CHECKLIST`/`TASKS_AUDIT_REPORT`/`INDEX`/`ONE_SHOT_RUN_REPORT`.
 
 - 2026-02-28: Добавлен `docs/UI_FULL_IMPLEMENTATION_REPORT_RU.md` с полным реестром UI-функций, hotkeys, тестового прогона и задач A–K с фиксацией доступных/заблокированных пунктов текущего snapshot.
+
+- 2026-02-28: Добавлен базовый RU localization/tooltip слой UI: `DictionaryLocalizationService` + `RussianUiStrings`, `ItemTooltipBuilder` и EditMode тесты локализации/подсказок для предметов.

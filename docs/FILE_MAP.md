@@ -21,6 +21,8 @@
   - UI/UseCases/ — прикладные UI операции (например, hotbar assignment).
 - Presentation/ — Unity сцены, MonoBehaviours, UI Views, Input, NavMesh, VFX/Anim.
   - UI/Windowing/ — базовый windowing framework и планировщик UI refresh.
+  - UI/Localization/ — словари и сервис локализации интерфейса (RU по умолчанию).
+  - UI/Tooltips/ — модели и билдеры подсказок для предметов/статов/действий.
   - UI/Windows/ — прикладные окна (Inventory/Character/SocketInspector и др.).
     - Skills/ — compiled skills panel и данные для биндинга на hotbar.
     - PassiveTree/ — состояние и сервисы окна дерева пассивов (zoom/pan/search/preview).
