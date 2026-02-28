@@ -1,3 +1,4 @@
+using System;
 namespace Game.Presentation.UI.Windowing
 {
     public sealed class UIHotkeyRouter
@@ -7,7 +8,7 @@ namespace Game.Presentation.UI.Windowing
 
         public UIHotkeyRouter(WindowManager windowManager, IUIHotkeyBindings bindings = null)
         {
-            _windowManager = windowManager;
+            _windowManager = windowManager ?? throw new ArgumentNullException(nameof(windowManager));
             _bindings = bindings ?? new DefaultUIHotkeyBindings();
         }
 

@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 
 namespace Game.Presentation.UI.Windowing
@@ -22,7 +23,7 @@ namespace Game.Presentation.UI.Windowing
 
         public DefaultUIHotkeyBindings(IReadOnlyDictionary<UIHotkey, WindowId> map)
         {
-            _map = map;
+            _map = map ?? throw new ArgumentNullException(nameof(map));
         }
 
         public bool TryGetWindow(UIHotkey hotkey, out WindowId windowId)

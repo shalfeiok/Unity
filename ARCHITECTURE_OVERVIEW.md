@@ -8,7 +8,7 @@
 3. **Infrastructure** (`Assets/Game/Runtime/Infrastructure`)
    - persistence, ledger, data validators, perf budget providers.
 4. **Presentation** (`Assets/Game/Runtime/Presentation`)
-   - windowing framework, HUD/services, tooltip/localization, input helpers (`UIInputRouter`, hotkey resolver/bindings).
+   - windowing framework, HUD/services, tooltip/localization, input helpers (`UIInputRouter`, hotkey resolver/bindings, ESC back-navigation contract).
 5. **Tests** (`Assets/Game/Tests`)
    - EditMode и PlayMode smoke/regression покрытие.
 

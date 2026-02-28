@@ -23,7 +23,7 @@ namespace Game.Presentation.UI.Windowing
 
         public DefaultUIHotkeyResolver(IReadOnlyDictionary<string, UIHotkey> map)
         {
-            _map = map;
+            _map = map ?? throw new ArgumentNullException(nameof(map));
         }
 
         public bool TryResolve(string key, out UIHotkey hotkey)

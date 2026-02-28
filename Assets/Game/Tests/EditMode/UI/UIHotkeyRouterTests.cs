@@ -6,6 +6,12 @@ namespace Game.Tests.EditMode.UI
 {
     public sealed class UIHotkeyRouterTests
     {
+
+        [Test]
+        public void Ctor_NullWindowManager_Throws()
+        {
+            Assert.Throws<System.ArgumentNullException>(() => new UIHotkeyRouter(null));
+        }
         [Test]
         public void TryResolveWindow_UsesDefaultBindings_ForAtlasAndCraftHotkeys()
         {
