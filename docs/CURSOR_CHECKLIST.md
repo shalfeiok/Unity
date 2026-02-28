@@ -88,11 +88,11 @@
 - [x] SocketModel + LinkGroups
 - [x] SkillGemDefinition + SupportGemDefinition + GemInstance
 - [x] SupportEffectKind enum (каталог)
-- [ ] SkillBuildCompiler:
-  - [ ] supports только в linkGroup
-  - [ ] rejected supports with reasons
-  - [ ] stable order (Order then GemId)
-  - [ ] Explain breakdown
+- [x] SkillBuildCompiler:
+  - [x] supports только в linkGroup
+  - [x] rejected supports with reasons
+  - [x] stable order (Order then GemId)
+  - [x] Explain breakdown
 
 ### 4.3 Passive Tree
 - [x] PassiveTreeDefinition graph (nodes/edges/positions)

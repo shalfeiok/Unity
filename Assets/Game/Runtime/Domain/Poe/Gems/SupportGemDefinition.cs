@@ -6,5 +6,6 @@ namespace Game.Domain.Poe.Gems
         public SupportEffectKind Effect;
         public string[] RequiredTags;
         public float Value;
+        public int Order;
     }
 }

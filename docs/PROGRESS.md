@@ -57,3 +57,5 @@
 - 2026-02-28: Закрыты канонические пробелы по combat/perf: расширен `DamageBreakdown` до полного пайплайна (вкл. GainAsExtra/Crit/Mitigation), добавлен `PerfBudgetEnforcer` и лимиты в `PerfBudgetSettings` (enemies/projectiles/loot labels/ui refresh) с EditMode тестами; обновлены checklist/audit/file map.
 
 - 2026-02-28: Расширен PoE item/crafting MVP: `ItemBaseDefinition.ImplicitMods` + генерация `GeneratedPoeItem.Implicits`; CurrencyActionEngine доведён до операций reroll/add/remove/reforge-bias/set sockets/reroll colors/reroll links/improve quality/corrupt, добавлены EditMode тесты и обновлены audit/checklist статусы.
+
+- 2026-02-28: Доработан `SkillBuildCompiler`: добавлен расширенный Explain-профиль (`SupportExplainEntry`, reason codes, required/missing tags), стабилизирован порядок `Order -> GemId`, обновлены тесты и чеклист/audit.

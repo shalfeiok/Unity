@@ -8,8 +8,8 @@
 
 ## Сводная статистика
 - Всего проверено пунктов: **64**
-- ✅ Выполнено: **62**
-- ⚠️ Реализовано частично / иначе: **1**
+- ✅ Выполнено: **63**
+- ⚠️ Реализовано частично / иначе: **0**
 - ❌ Не выполнено: **1**
 
 ---
@@ -51,7 +51,7 @@
 - ✅ PoeItemGenerator deterministic есть.
 - ✅ ModPoolValidator есть.
 - ✅ Socket/Gems/Compiler есть.
-- ⚠️ SkillBuildCompiler Explain breakdown реализован частично (applied/rejected reasons есть, расширенный explain-профиль отсутствует).
+- ✅ SkillBuildCompiler получил Explain-профиль: applied/rejected, reason code/text, required/missing tags, deterministic order (Order→GemId).
 - ✅ Passive tree allocation/respec connectivity есть.
 - ✅ Добавлен PassiveTreeSearchIndex с поиском по id/name/tags.
 - ✅ Flask charges rules есть.
