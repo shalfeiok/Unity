@@ -106,7 +106,7 @@
 
 ### 4.5 Currency Actions
 - [x] CurrencyActionDefinition + engine
-- [ ] Operations MVP: reroll/add/remove/bias/sockets/colors/links/quality/(corrupt optional)
+- [x] Operations MVP: reroll/add/remove/bias/sockets/colors/links/quality/(corrupt optional)
 - [x] deterministic Craft RNG stream
 - [x] Ledger entry on apply
 

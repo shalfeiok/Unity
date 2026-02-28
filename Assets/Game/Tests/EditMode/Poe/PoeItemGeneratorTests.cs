@@ -46,6 +46,24 @@ namespace Game.Tests.EditMode.Poe
                 Assert.LessOrEqual(lowIlvl.Mods[i].Definition.MinItemLevel, 1);
         }
 
+        [Test]
+        public void Generate_RollsImplicits_FromBaseDefinition()
+        {
+            var pool = BuildPool();
+            var baseDef = new ItemBaseDefinition
+            {
+                Id = "axe", ItemClass = "Axe", RequiredItemLevel = 1,
+                ImplicitMods = new List<ModDefinition>
+                {
+                    new() { Id = "implicit_phys", Group = "imp_phys", IsPrefix = true, MinItemLevel = 1, MinValue = 5, MaxValue = 10 }
+                }
+            };
+            var item = new PoeItemGenerator(new XorShift32Rng(3)).Generate(baseDef, pool, 20);
+
+            Assert.AreEqual(1, item.Implicits.Count);
+            Assert.AreEqual("implicit_phys", item.Implicits[0].Definition.Id);
+        }
+
         private static List<ModDefinition> BuildPool()
         {
             return new List<ModDefinition>

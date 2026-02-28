@@ -55,3 +55,5 @@
 - 2026-02-28: Добавлена интеграция flask effects через Modifier v2: `FlaskDefinition.Effects`, `FlaskService.BuildEffectModifiers`, перегрузка `UseFlaskUseCase` с применением эффектов в `StatSheet`; добавлены/обновлены EditMode тесты и статистика аудита.
 
 - 2026-02-28: Закрыты канонические пробелы по combat/perf: расширен `DamageBreakdown` до полного пайплайна (вкл. GainAsExtra/Crit/Mitigation), добавлен `PerfBudgetEnforcer` и лимиты в `PerfBudgetSettings` (enemies/projectiles/loot labels/ui refresh) с EditMode тестами; обновлены checklist/audit/file map.
+
+- 2026-02-28: Расширен PoE item/crafting MVP: `ItemBaseDefinition.ImplicitMods` + генерация `GeneratedPoeItem.Implicits`; CurrencyActionEngine доведён до операций reroll/add/remove/reforge-bias/set sockets/reroll colors/reroll links/improve quality/corrupt, добавлены EditMode тесты и обновлены audit/checklist статусы.

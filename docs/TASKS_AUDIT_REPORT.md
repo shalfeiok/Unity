@@ -8,9 +8,9 @@
 
 ## Сводная статистика
 - Всего проверено пунктов: **64**
-- ✅ Выполнено: **60**
-- ⚠️ Реализовано частично / иначе: **2**
-- ❌ Не выполнено: **2**
+- ✅ Выполнено: **62**
+- ⚠️ Реализовано частично / иначе: **1**
+- ❌ Не выполнено: **1**
 
 ---
 
@@ -46,7 +46,7 @@
 - ✅ Добавлен PickupLootUseCase (transaction + inventory update + event publish) и покрыт EditMode тестом.
 
 ## 4) PoE Core
-- ⚠️ ItemBaseDefinition присутствует, но implicits как отдельная модель/поток выделены ограниченно.
+- ✅ ItemBaseDefinition поддерживает implicits как отдельный поток (`ImplicitMods` -> `GeneratedPoeItem.Implicits`).
 - ✅ ModDefinition + tiers/ilvl/group conflicts (в базовом виде) есть.
 - ✅ PoeItemGenerator deterministic есть.
 - ✅ ModPoolValidator есть.
@@ -56,7 +56,7 @@
 - ✅ Добавлен PassiveTreeSearchIndex с поиском по id/name/tags.
 - ✅ Flask charges rules есть.
 - ✅ Flask effects интегрированы через Modifier v2 (`FlaskEffectDefinition` + build/apply в use case).
-- ✅ Currency actions + deterministic craft RNG + ledger entry есть.
+- ✅ Currency actions расширены до MVP (reroll/add/remove/bias/sockets/colors/links/quality/corrupt) + deterministic craft RNG + ledger entry.
 
 ## 5) Application UseCases + Transactions
 - ✅ TransactionRunner idempotency есть.

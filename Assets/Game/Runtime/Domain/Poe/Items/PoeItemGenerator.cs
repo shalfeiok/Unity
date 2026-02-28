@@ -26,22 +26,57 @@ namespace Game.Domain.Poe.Items
                 rolls.Add(new GeneratedPoeMod(mod, value));
             }
 
-            return new GeneratedPoeItem(itemBase, itemLevel, rolls);
+            var implicits = new List<GeneratedPoeMod>();
+            if (itemBase?.ImplicitMods != null)
+            {
+                for (int i = 0; i < itemBase.ImplicitMods.Count; i++)
+                {
+                    var mod = itemBase.ImplicitMods[i];
+                    float t = _rng.Next01();
+                    float value = mod.MinValue + (mod.MaxValue - mod.MinValue) * t;
+                    implicits.Add(new GeneratedPoeMod(mod, value));
+                }
+            }
+
+            return new GeneratedPoeItem(itemBase, itemLevel, rolls, implicits, quality: 0, socketColors: System.Array.Empty<SocketColor>(), linkGroups: System.Array.Empty<int[]>(), isCorrupted: false);
         }
     }
 
     public readonly struct GeneratedPoeItem
     {
         public GeneratedPoeItem(ItemBaseDefinition itemBase, int itemLevel, IReadOnlyList<GeneratedPoeMod> mods)
+            : this(itemBase, itemLevel, mods, System.Array.Empty<GeneratedPoeMod>(), 0, System.Array.Empty<SocketColor>(), System.Array.Empty<int[]>(), false)
+        {
+        }
+
+        public GeneratedPoeItem(
+            ItemBaseDefinition itemBase,
+            int itemLevel,
+            IReadOnlyList<GeneratedPoeMod> mods,
+            IReadOnlyList<GeneratedPoeMod> implicits,
+            int quality,
+            IReadOnlyList<SocketColor> socketColors,
+            IReadOnlyList<int[]> linkGroups,
+            bool isCorrupted)
         {
             ItemBase = itemBase;
             ItemLevel = itemLevel;
             Mods = mods;
+            Implicits = implicits;
+            Quality = quality;
+            SocketColors = socketColors;
+            LinkGroups = linkGroups;
+            IsCorrupted = isCorrupted;
         }
 
         public ItemBaseDefinition ItemBase { get; }
         public int ItemLevel { get; }
         public IReadOnlyList<GeneratedPoeMod> Mods { get; }
+        public IReadOnlyList<GeneratedPoeMod> Implicits { get; }
+        public int Quality { get; }
+        public IReadOnlyList<SocketColor> SocketColors { get; }
+        public IReadOnlyList<int[]> LinkGroups { get; }
+        public bool IsCorrupted { get; }
     }
 
     public readonly struct GeneratedPoeMod
