@@ -53,3 +53,5 @@
 - 2026-02-28: Реализованы оставшиеся пробелы по задачам: добавлены `PickupLootUseCase` (идемпотентный pickup + inventory update + событие `LootPickedUp`) и `PassiveTreeSearchIndex` (поиск по id/name/tags) с тестами; обновлены checklist/audit статистики.
 
 - 2026-02-28: Добавлена интеграция flask effects через Modifier v2: `FlaskDefinition.Effects`, `FlaskService.BuildEffectModifiers`, перегрузка `UseFlaskUseCase` с применением эффектов в `StatSheet`; добавлены/обновлены EditMode тесты и статистика аудита.
+
+- 2026-02-28: Закрыты канонические пробелы по combat/perf: расширен `DamageBreakdown` до полного пайплайна (вкл. GainAsExtra/Crit/Mitigation), добавлен `PerfBudgetEnforcer` и лимиты в `PerfBudgetSettings` (enemies/projectiles/loot labels/ui refresh) с EditMode тестами; обновлены checklist/audit/file map.

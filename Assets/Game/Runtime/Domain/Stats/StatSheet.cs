@@ -21,8 +21,14 @@ namespace Game.Domain.Stats
 
         public DamageBreakdown GetDamageBreakdown(StatId stat)
         {
-            var computation = _modifiers.Compute(stat, GetBase(stat));
-            return new DamageBreakdown(computation);
+            return GetDamageBreakdown(stat, critChance: 0f, critMultiplier: 1.5f, mitigation: 0f);
+        }
+
+        public DamageBreakdown GetDamageBreakdown(StatId stat, float critChance, float critMultiplier, float mitigation)
+        {
+            var baseValue = GetBase(stat);
+            var computation = _modifiers.Compute(stat, baseValue);
+            return new DamageBreakdown(computation, baseValue, critChance, critMultiplier, mitigation);
         }
 
         public ModifierComputation GetComputation(StatId stat) => _modifiers.Compute(stat, GetBase(stat));

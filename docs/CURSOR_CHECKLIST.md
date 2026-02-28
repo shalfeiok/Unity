@@ -26,10 +26,10 @@
 ### 1.2 Modifier Algebra v2
 - [x] Bucket model: Base/Add/Increased/More/Conversion/GainAsExtra/Cap
 - [x] Provenance: источник каждого модификатора (items/passives/gems/flasks/effects)
-- [ ] DamageBreakdown: Base→Added→Increased→More→Conversion→GainAsExtra→Crit→Mitigation→Final
+- [x] DamageBreakdown: Base→Added→Increased→More→Conversion→GainAsExtra→Crit→Mitigation→Final
 
 ### 1.3 Perf
-- [ ] PerfBudget (maxEnemies/maxProjectiles/maxLootLabels/maxUiRefreshPerFrame)
+- [x] PerfBudget (maxEnemies/maxProjectiles/maxLootLabels/maxUiRefreshPerFrame)
 - [ ] Pools: projectiles/floating texts/loot actors/tooltips/toasts
 - [x] UIRefreshScheduler batching
 

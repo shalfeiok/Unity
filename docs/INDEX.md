@@ -39,6 +39,7 @@
 - `docs/FILE_MAP.md`
 - `docs/PROGRESS.md` (журнал выполнения задач)
 - `docs/TASKS_AUDIT_REPORT.md` (аудит задач: выполнено/частично/не выполнено + статистика)
+- `docs/ONE_SHOT_RUN_REPORT.md` (итоговый one-shot отчёт: изменения, коммиты, ручная/авто-проверка)
 
 ## 4) Исходник (для трассируемости)
 - `docs/SOURCE_ORIGINAL_PROMPT.md`

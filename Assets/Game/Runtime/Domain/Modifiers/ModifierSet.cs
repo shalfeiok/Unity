@@ -20,6 +20,7 @@ namespace Game.Domain.Modifiers
             float add = 0f;
             float increased = 0f;
             float more = 1f;
+            float gainAsExtra = 0f;
             float cap = float.PositiveInfinity;
             var conversions = new List<Modifier>();
 
@@ -39,6 +40,9 @@ namespace Game.Domain.Modifiers
                         break;
                     case ModifierBucket.More:
                         more *= 1f + mod.Value;
+                        break;
+                    case ModifierBucket.GainAsExtra:
+                        gainAsExtra += mod.Value;
                         break;
                     case ModifierBucket.Cap:
                         if (mod.Value < cap) cap = mod.Value;
@@ -65,11 +69,12 @@ namespace Game.Domain.Modifiers
                 converted += piece;
             }
 
-            float finalValue = remaining;
+            float extra = valueBeforeConversion * gainAsExtra;
+            float finalValue = remaining + extra;
             if (!float.IsPositiveInfinity(cap) && finalValue > cap)
                 finalValue = cap;
 
-            return new ModifierComputation(finalValue, valueBeforeConversion, add, increased, more, converted, conversions);
+            return new ModifierComputation(finalValue, valueBeforeConversion, add, increased, more, converted, extra, conversions);
         }
     }
 
@@ -82,6 +87,7 @@ namespace Game.Domain.Modifiers
             float increased,
             float more,
             float convertedOut,
+            float gainedAsExtra,
             IReadOnlyList<Modifier> orderedConversions)
         {
             FinalValue = finalValue;
@@ -90,6 +96,7 @@ namespace Game.Domain.Modifiers
             Increased = increased;
             More = more;
             ConvertedOut = convertedOut;
+            GainedAsExtra = gainedAsExtra;
             OrderedConversions = orderedConversions;
         }
 
@@ -99,6 +106,7 @@ namespace Game.Domain.Modifiers
         public float Increased { get; }
         public float More { get; }
         public float ConvertedOut { get; }
+        public float GainedAsExtra { get; }
         public IReadOnlyList<Modifier> OrderedConversions { get; }
     }
 }

@@ -8,8 +8,8 @@
 
 ## Сводная статистика
 - Всего проверено пунктов: **64**
-- ✅ Выполнено: **58**
-- ⚠️ Реализовано частично / иначе: **4**
+- ✅ Выполнено: **60**
+- ⚠️ Реализовано частично / иначе: **2**
 - ❌ Не выполнено: **2**
 
 ---
@@ -24,8 +24,8 @@
 - ✅ RNG streams (`RngProvider`, `RngStreamId`).
 - ✅ Запрет `UnityEngine.Random` в Domain через `DomainAssemblyGuardTests`.
 - ✅ Bucket model + provenance реализованы (`Modifier`, `ModifierSet`, `ModifierBucket`).
-- ⚠️ `DamageBreakdown` реализован в упрощённом виде (без полного канонического пайплайна Crit/Mitigation/GainAsExtra стадий).
-- ⚠️ PerfBudget реализован частично: есть `PerfBudgetSettings` + batching/pooling, но нет полного набора жёстких лимитов (enemies/projectiles/loot labels) и enforcement-механики.
+- ✅ `DamageBreakdown` расширен до канонического пайплайна Base→Added→Increased→More→Conversion→GainAsExtra→Crit→Mitigation→Final.
+- ✅ PerfBudget расширен лимитами (enemies/projectiles/loot labels/ui refresh) и enforcement-классом `PerfBudgetEnforcer` + EditMode тесты.
 - ✅ DeterminismRngTests / ModifierAlgebraTests / DamageBreakdownTests есть.
 
 ## 2) UI Windowing

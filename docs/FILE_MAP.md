@@ -33,7 +33,7 @@
   - Common/ — инфраструктурные клиентские утилиты (например, object pooling).
   - World/ — world-actors для лута и других in-world presentation сущностей.
 - Infrastructure/ — IO, serialization, logging adapters, профилировщики.
-  - Config/ — конфиги производительности (PerfBudget settings/provider).
+  - Config/ — конфиги производительности (PerfBudget settings/provider) и enforcement лимитов.
   - Persistence/ — JSON storage и репозитории сохранения layout/state.
   - DataPipeline/ — валидация таблиц данных и контентных пулов.
   - Economy/ — append-only ledger и audit trail экономики.
