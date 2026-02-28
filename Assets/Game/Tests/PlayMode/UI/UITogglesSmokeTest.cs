@@ -17,34 +17,38 @@ namespace Game.Tests.PlayMode.UI
     public sealed class UITogglesSmokeTest
     {
         [Test]
-        public void ToggleCorePanels_ByHotkeyIntent_Smoke()
+        public void ToggleCorePanels_ByHotkeyRouter_Smoke()
         {
             var registry = new WindowRegistry();
             var service = new WindowService(registry);
             var manager = new WindowManager(service);
+            var hotkeys = new UIHotkeyRouter(manager);
 
-            var hotkeyMapping = new Dictionary<string, WindowId>
+            var toggleCases = new Dictionary<UIHotkey, WindowId>
             {
-                ["I"] = WindowId.Inventory,
-                ["C"] = WindowId.Character,
-                ["P"] = WindowId.PassiveTree,
-                ["S"] = WindowId.Skills,
-                ["K"] = WindowId.Craft,
-                ["O"] = WindowId.Craft,
-                ["M"] = WindowId.PassiveTree
+                [UIHotkey.Inventory] = WindowId.Inventory,
+                [UIHotkey.Character] = WindowId.Character,
+                [UIHotkey.PassiveTree] = WindowId.PassiveTree,
+                [UIHotkey.Skills] = WindowId.Skills,
+                [UIHotkey.SkillcraftForge] = WindowId.Craft,
+                [UIHotkey.CraftingBench] = WindowId.Craft,
+                [UIHotkey.Atlas] = WindowId.Atlas
             };
 
-            foreach (var mapping in hotkeyMapping)
+            foreach (var testCase in toggleCases)
             {
                 bool visible = false;
-                registry.Register(mapping.Value, state => visible = state);
+                registry.Register(testCase.Value, state => visible = state);
 
-                manager.Toggle(mapping.Value);
-                Assert.True(service.IsOpen(mapping.Value), $"Expected {mapping.Key} to open {mapping.Value}.");
-                Assert.True(visible, $"Expected visibility callback for {mapping.Value}.");
+                Assert.True(hotkeys.TryResolveWindow(testCase.Key, out var resolved));
+                Assert.AreEqual(testCase.Value, resolved);
 
-                manager.Toggle(mapping.Value);
-                Assert.False(service.IsOpen(mapping.Value), $"Expected {mapping.Key} to close {mapping.Value}.");
+                Assert.True(hotkeys.TryToggle(testCase.Key));
+                Assert.True(service.IsOpen(testCase.Value));
+                Assert.True(visible);
+
+                Assert.True(hotkeys.TryToggle(testCase.Key));
+                Assert.False(service.IsOpen(testCase.Value));
             }
         }
 

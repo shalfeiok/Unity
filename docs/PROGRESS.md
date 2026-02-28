@@ -76,3 +76,5 @@
 - 2026-02-28: `UiEventLogService` расширен detailed RU-сообщениями для passive/hotbar событий (allocate/refund/assign/unassign) с payload-aware fallback; добавлены EditMode тесты на форматирование.
 - 2026-02-28: Доведено покрытие `UiEventLogServiceTests` до полной пары событий passive (allocate/refund) и добавлен explicit fallback-тест для `HotbarAssigned` при неполном payload.
 - 2026-02-28: Добавлен PlayMode тест `UITogglesSmokeTest` (toggle I/C/P/S/K/O/M + service-level vertical smoke: hotbar assign, passive allocate, craft preview/commit), а также сгенерированы верхнеуровневые отчёты `SUMMARY_IMPLEMENTATION_REPORT.md`, `ARCHITECTURE_OVERVIEW.md`, `SYSTEM_DEPENDENCY_GRAPH.md`, `BALANCE_GUIDELINES.md`, `CHANGELOG.md`.
+
+- 2026-02-28: Улучшен hotkey слой UI: добавлены `UIHotkey`/`UIHotkeyRouter`, расширен `WindowId` значением `Atlas`, обновлён PlayMode `UITogglesSmokeTest` на production-маршрутизацию и добавлены EditMode тесты `UIHotkeyRouterTests`.
