@@ -1,6 +1,7 @@
 # CHANGELOG
 
 ## 2026-02-28
+- Synced `UIInputRouter` panel toggles with input context (`Gameplay` <-> `UI`) using `HasOpenPanels()` to avoid stale UI context when no panels remain.
 - Fixed `UIInputRouter.TryHandleEscape()` to pop `InputContext.Modal` when a modal is closed via back-navigation, preventing stuck modal input state.
 - Added modal lifecycle hooks in `UIInputRouter` (`OnModalOpened`/`OnModalClosed`) and aligned back-navigation contract with `EnterModal`/`ExitModal`.
 - Made hotkey toggling state-aware via `UIHotkeyRouter.TryToggle(..., out windowId, out isOpen)` and wired deterministic back-navigation notifications in `UIInputRouter`.

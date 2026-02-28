@@ -1,6 +1,7 @@
 # SUMMARY_IMPLEMENTATION_REPORT
 
 ## Что добавлено в этом обновлении
+- Добавлена явная синхронизация `InputContext` с состоянием панелей: при открытии первой панели переход в `UI`, при закрытии последней — возврат в `Gameplay` (в т.ч. через Esc).
 - Исправлена синхронизация контекста при Esc: при успешном `TryCloseModal()` роутер снимает `InputContext.Modal`, чтобы не оставаться в «залипшем» modal-состоянии ввода.
 - В `UIInputRouter` добавлен lifecycle API для модалок: `OnModalOpened()` / `OnModalClosed()` с синхронизацией `InputContextStack` и back-navigation depth.
 - `UIHotkeyRouter` получил атомарный `TryToggle(..., out windowId, out isOpen)`, чтобы `UIInputRouter` уведомлял back-navigation только после успешного toggling с фактическим состоянием окна.

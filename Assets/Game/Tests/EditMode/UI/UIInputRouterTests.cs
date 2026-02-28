@@ -9,6 +9,7 @@ namespace Game.Tests.EditMode.UI
         public void TryHandleToggleKey_WhenGameplay_TogglesWindow()
         {
             var registry = new WindowRegistry();
+            registry.Register(WindowId.Inventory, _ => { });
             var service = new WindowService(registry);
             var manager = new WindowManager(service);
             var input = new UIInputRouter(new InputContextStack(), new UIHotkeyRouter(manager));
@@ -16,7 +17,7 @@ namespace Game.Tests.EditMode.UI
             Assert.True(input.TryHandleToggleKey("I"));
             Assert.True(service.IsOpen(WindowId.Inventory));
 
-            Assert.False(input.TryHandleToggleKey("I"));
+            Assert.True(input.TryHandleToggleKey("I"));
             Assert.False(service.IsOpen(WindowId.Inventory));
         }
 
@@ -114,22 +115,6 @@ namespace Game.Tests.EditMode.UI
         }
 
         [Test]
-        public void TryHandleEscape_WhenUiContext_ClosesTopPanel()
-        {
-            var contexts = new InputContextStack();
-            contexts.Push(InputContext.UI);
-            var back = new BackNavigationStub(hasModal: false, closeModalResult: false, closeTopPanelResult: true);
-            var input = new UIInputRouter(
-                contexts,
-                new UIHotkeyRouter(new WindowManager(new WindowService(new WindowRegistry()))),
-                backNavigation: back);
-
-            Assert.True(input.TryHandleEscape());
-            Assert.AreEqual(0, back.CloseModalCalls);
-            Assert.AreEqual(1, back.CloseTopPanelCalls);
-        }
-
-        [Test]
         public void TryHandleEscape_WithWindowStackBackNavigation_ClosesLastToggledPanel()
         {
             var registry = new WindowRegistry();
@@ -148,6 +133,52 @@ namespace Game.Tests.EditMode.UI
             Assert.False(service.IsOpen(WindowId.Inventory));
         }
 
+
+
+        [Test]
+        public void TogglePanels_UpdatesInputContext_ByOpenPanelCount()
+        {
+            var registry = new WindowRegistry();
+            registry.Register(WindowId.Inventory, _ => { });
+            registry.Register(WindowId.Character, _ => { });
+            var service = new WindowService(registry);
+            var manager = new WindowManager(service);
+            var contexts = new InputContextStack();
+            var back = new WindowStackBackNavigation(service);
+            var input = new UIInputRouter(contexts, new UIHotkeyRouter(manager), backNavigation: back);
+
+            Assert.AreEqual(InputContext.Gameplay, contexts.Current);
+            Assert.True(input.TryHandleToggleKey("I"));
+            Assert.AreEqual(InputContext.UI, contexts.Current);
+
+            Assert.True(input.TryHandleToggleKey("C"));
+            Assert.AreEqual(InputContext.UI, contexts.Current);
+
+            Assert.True(input.TryHandleToggleKey("C"));
+            Assert.AreEqual(InputContext.UI, contexts.Current);
+
+            Assert.True(input.TryHandleToggleKey("I"));
+            Assert.AreEqual(InputContext.Gameplay, contexts.Current);
+        }
+
+        [Test]
+        public void TryHandleEscape_ClosesPanelAndPopsToGameplay_WhenLastPanelClosed()
+        {
+            var registry = new WindowRegistry();
+            registry.Register(WindowId.Inventory, _ => { });
+            var service = new WindowService(registry);
+            var manager = new WindowManager(service);
+            var contexts = new InputContextStack();
+            var back = new WindowStackBackNavigation(service);
+            var input = new UIInputRouter(contexts, new UIHotkeyRouter(manager), backNavigation: back);
+
+            Assert.True(input.TryHandleToggleKey("I"));
+            Assert.AreEqual(InputContext.UI, contexts.Current);
+
+            Assert.True(input.TryHandleEscape());
+            Assert.AreEqual(InputContext.Gameplay, contexts.Current);
+            Assert.False(service.IsOpen(WindowId.Inventory));
+        }
 
         [Test]
         public void OnModalOpened_AndOnModalClosed_TrackModalDepthAndContext()
@@ -224,9 +255,11 @@ namespace Game.Tests.EditMode.UI
                 return _closeTopPanelResult;
             }
 
+            private int _openPanelCount;
+
             public bool HasOpenPanels()
             {
-                return LastIsOpen;
+                return _openPanelCount > 0;
             }
 
             public void NotifyWindowState(WindowId windowId, bool isOpen)
@@ -234,6 +267,11 @@ namespace Game.Tests.EditMode.UI
                 NotifyCalls++;
                 LastWindowId = windowId;
                 LastIsOpen = isOpen;
+
+                if (isOpen)
+                    _openPanelCount++;
+                else if (_openPanelCount > 0)
+                    _openPanelCount--;
             }
 
             public void EnterModal()

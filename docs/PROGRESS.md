@@ -85,3 +85,4 @@
 - 2026-02-28: `UIHotkeyRouter` переведён на state-aware toggle (out `windowId`/`isOpen`), `UIInputRouter` уведомляет back-navigation только после успешного toggling; расширены EditMode тесты на notify/failure-path.
 - 2026-02-28: Добавлены lifecycle-хуки `UIInputRouter.OnModalOpened/OnModalClosed`; контракт back-navigation расширен методами `EnterModal/ExitModal`, синхронизированы тесты и стековая реализация.
 - 2026-02-28: Исправлен edge-case Esc: `UIInputRouter.TryHandleEscape()` теперь снимает `InputContext.Modal` после успешного закрытия модалки; добавлен EditMode тест на pop modal context.
+- 2026-02-28: Синхронизирован `InputContextStack` с panel stack: `UIInputRouter` переводит Gameplay->UI при открытии первой панели и UI->Gameplay при закрытии последней (toggle/Esc).
