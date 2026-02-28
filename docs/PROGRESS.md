@@ -23,3 +23,6 @@
 - 2026-02-27: Добавлены docs/ARCHIVE_ACTIONS_MAP.md и docs/CURSOR_EXECUTION_SCRIPT.md (полная карта действий и пошаговый скрипт для Cursor).
 - 2026-02-27: Добавлены docs/CURSOR_CHECKLIST.md, docs/DEFINITION_OF_READY_DONE.md, docs/STAGE_ACCEPTANCE_MATRIX.md для жёсткого контроля исполнения.
 - 2026-02-28: Выполнен первый проход preflight/AAA foundation: добавлены layered asmdef, fixed-tick SimulationLoop/SimTime, детерминированные RNG streams (RngProvider + RngStreamId) и EditMode тесты для симуляции и детерминизма.
+- 2026-02-28: Реализована Modifier Algebra v2: новые buckets (Add/Increased/More/Conversion/Cap), provenance-упорядочивание conversion по sourceId, интеграция в StatSheet и DamageBreakdown + EditMode тесты (sum increased / multiply more / stable conversion order).
+- 2026-02-28: Добавлены базовые perf-инструменты: UIRefreshScheduler (budgeted batching), generic ObjectPool<T>, PerfBudgetSettings/Provider для загрузки бюджетов из Resources + EditMode тесты scheduler/pool.
+- 2026-02-28: Старт windowing framework: добавлены WindowId, WindowRegistry, IWindowService/WindowService, WindowManager, WindowRoot (MonoBehaviour) и EditMode тест на open/close state.
