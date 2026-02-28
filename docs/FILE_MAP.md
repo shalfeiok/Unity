@@ -15,7 +15,7 @@
     - Flasks/ — модель фласок и сервис зарядов/использования.
 - Application/ — use cases, сервисы сценариев: equip/cast/generate/save.
   - Transactions/ — transaction runner, idempotency и orchestration use case pipeline.
-  - Poe/UseCases/ — PoE сценарии: gem/passive/flask/currency operations (вкл. InsertGem/RemoveGem).
+  - Poe/UseCases/ — PoE сценарии: gem/passive/flask/currency operations (вкл. InsertGem/RemoveGem/RefundPassive).
 - Presentation/ — Unity сцены, MonoBehaviours, UI Views, Input, NavMesh, VFX/Anim.
   - UI/Windowing/ — базовый windowing framework и планировщик UI refresh.
   - UI/Windows/ — прикладные окна (Inventory/Character/SocketInspector и др.).

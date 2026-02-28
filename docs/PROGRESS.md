@@ -43,3 +43,4 @@
 - 2026-02-28: Добавлены Craft Window и Flask Belt HUD базовые сервисы/состояния: предпросмотр и применение currency action в окне крафта, отображение charges/usability для flask slots, плюс EditMode тесты.
 - 2026-02-28: Добавлен блок PlayMode smoke tests для PoE UI-флоу: GemDragDropSmokeTests, PassiveTreeAllocateSmokeTests, CraftApplySmokeTests.
 - 2026-02-28: Добавлены PlayMode WindowingSmokeTests: smoke на open/toggle окон и save/load layout с проверкой drag-позиции.
+- 2026-02-28: Добавлен RefundPassiveNodeUseCase (respec) в Application слой с EditMode тестом на соблюдение правил связности дерева при возврате нод.
