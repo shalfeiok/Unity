@@ -33,8 +33,8 @@ namespace Game.Presentation.UI.Feedback
         {
             var message = appEvent.Type switch
             {
-                ApplicationEventType.GemInserted => Translate("event.gem_inserted"),
-                ApplicationEventType.GemRemoved => Translate("event.gem_removed"),
+                ApplicationEventType.GemInserted => BuildGemInsertedMessage(appEvent),
+                ApplicationEventType.GemRemoved => BuildGemRemovedMessage(appEvent),
                 ApplicationEventType.PassiveAllocated => Translate("event.passive_allocated"),
                 ApplicationEventType.PassiveRefunded => Translate("event.passive_refunded"),
                 ApplicationEventType.CurrencyApplied => BuildCurrencyAppliedMessage(appEvent),
@@ -77,6 +77,28 @@ namespace Game.Presentation.UI.Feedback
             }
 
             return TranslateFormat("event.currency_applied_detailed", actionId, itemId);
+        }
+
+        private string BuildGemInsertedMessage(ApplicationEvent appEvent)
+        {
+            if (!TryReadPayloadValue(appEvent, "gemId", out var gemId) ||
+                !TryReadPayloadValue(appEvent, "socketIndex", out var socketIndex))
+            {
+                return Translate("event.gem_inserted");
+            }
+
+            return TranslateFormat("event.gem_inserted_detailed", gemId, socketIndex);
+        }
+
+        private string BuildGemRemovedMessage(ApplicationEvent appEvent)
+        {
+            if (!TryReadPayloadValue(appEvent, "gemId", out var gemId) ||
+                !TryReadPayloadValue(appEvent, "socketIndex", out var socketIndex))
+            {
+                return Translate("event.gem_removed");
+            }
+
+            return TranslateFormat("event.gem_removed_detailed", gemId, socketIndex);
         }
 
         private string BuildFlaskUsedMessage(ApplicationEvent appEvent)

@@ -94,5 +94,34 @@ namespace Game.Tests.EditMode.UI.Feedback
             Assert.AreEqual(1, service.Entries.Count);
             Assert.AreEqual("Поднят предмет amulet_rare x2 (Rare)", service.Entries[0].Message);
         }
+
+        [Test]
+        public void Publish_GemInserted_WithPayload_UsesDetailedMessage()
+        {
+            var localizer = new DictionaryLocalizationService(RussianUiStrings.BuildDefault());
+            var service = new UiEventLogService(localizer);
+            var payload = new Dictionary<string, string>
+            {
+                ["gemId"] = "support_chain",
+                ["socketIndex"] = "3"
+            };
+
+            service.Publish(new ApplicationEvent(ApplicationEventType.GemInserted, "op_5", payload));
+
+            Assert.AreEqual(1, service.Entries.Count);
+            Assert.AreEqual("Самоцвет support_chain вставлен в сокет #3", service.Entries[0].Message);
+        }
+
+        [Test]
+        public void Publish_FlaskUsed_WithoutPayload_UsesBaseMessage()
+        {
+            var localizer = new DictionaryLocalizationService(RussianUiStrings.BuildDefault());
+            var service = new UiEventLogService(localizer);
+
+            service.Publish(new ApplicationEvent(ApplicationEventType.FlaskUsed, "op_6"));
+
+            Assert.AreEqual(1, service.Entries.Count);
+            Assert.AreEqual("Фласка использована", service.Entries[0].Message);
+        }
     }
 }
