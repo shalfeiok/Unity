@@ -37,3 +37,4 @@
 - 2026-02-28: Реализован блок PoE currency actions: CurrencyActionDefinition/CurrencyActionEngine (reroll/add/remove с детерминированным craft stream) и append-only TransactionLedger + EditMode тесты.
 - 2026-02-28: Реализован Application слой транзакций: TransactionRunner (idempotency) и PoE use cases (ApplyCurrencyAction, AllocatePassiveNode, UseFlask) + EditMode тесты.
 - 2026-02-28: Добавлены gem use cases уровня Application (InsertGem/RemoveGem) и Domain SocketService, плюс EditMode тесты для вставки/извлечения и idempotency через TransactionRunner.
+- 2026-02-28: Добавлен базовый UI слой окон Inventory/Character и SocketInspectorService (dragdrop gems, remove to inventory, compile applied/rejected supports) + EditMode тесты.
