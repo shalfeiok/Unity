@@ -59,3 +59,5 @@
 - 2026-02-28: Расширен PoE item/crafting MVP: `ItemBaseDefinition.ImplicitMods` + генерация `GeneratedPoeItem.Implicits`; CurrencyActionEngine доведён до операций reroll/add/remove/reforge-bias/set sockets/reroll colors/reroll links/improve quality/corrupt, добавлены EditMode тесты и обновлены audit/checklist статусы.
 
 - 2026-02-28: Доработан `SkillBuildCompiler`: добавлен расширенный Explain-профиль (`SupportExplainEntry`, reason codes, required/missing tags), стабилизирован порядок `Order -> GemId`, обновлены тесты и чеклист/audit.
+
+- 2026-02-28: Закрыт preflight-пункт аудита: добавлен `docs/PREFLIGHT_READ_LOG.md` и синхронизированы `CURSOR_CHECKLIST`/`TASKS_AUDIT_REPORT`/`INDEX`/`ONE_SHOT_RUN_REPORT`.

@@ -8,10 +8,10 @@
 ---
 
 ## 0) Preflight
-- [ ] Прочитаны: `docs/INDEX.md`, `docs/CURSOR_MASTER_PROMPT.md`
-- [ ] Прочитаны каноны: `specs/AAA_ARCHITECTURE_CANON.md`, `specs/UI_WINDOWING_FRAMEWORK.md`, `specs/UI_IMPLEMENTATION_PLAN_WINDOWING.md`
-- [ ] Прочитаны PoE каноны: `specs/POE_CORE_REQUIREMENTS.md` + детальные спеки
-- [ ] Прочитан D3 loot: `specs/LOOT_SYSTEM_D3.md`
+- [x] Прочитаны: `docs/INDEX.md`, `docs/CURSOR_MASTER_PROMPT.md`
+- [x] Прочитаны каноны: `specs/AAA_ARCHITECTURE_CANON.md`, `specs/UI_WINDOWING_FRAMEWORK.md`, `specs/UI_IMPLEMENTATION_PLAN_WINDOWING.md`
+- [x] Прочитаны PoE каноны: `specs/POE_CORE_REQUIREMENTS.md` + детальные спеки
+- [x] Прочитан D3 loot: `specs/LOOT_SYSTEM_D3.md`
 - [x] Созданы asmdef слоёв, зависимости корректны (Presentation→Application→Domain, Domain без Unity)
 - [x] Добавлен минимальный “fail fast” тест: Domain assembly не содержит Unity references
 

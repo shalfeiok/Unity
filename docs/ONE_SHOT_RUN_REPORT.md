@@ -58,3 +58,7 @@
 ## No TODO / No Placeholder Verification
 - Для изменённых в one-shot кодовых файлов выполнена проверка: отсутствуют новые `TODO`, `FIXME`, `stub`, `mock` комментарии.
 - Известные ограничения связаны не с placeholder-логикой, а с неполным составом Unity project assets в репозитории (см. scan mismatch).
+
+
+## Addendum
+- Добавлен `docs/PREFLIGHT_READ_LOG.md` как проверяемый preflight-артефакт чтения канонических документов.
