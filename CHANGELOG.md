@@ -1,6 +1,7 @@
 # CHANGELOG
 
 ## 2026-02-28
+- Made hotkey toggling state-aware via `UIHotkeyRouter.TryToggle(..., out windowId, out isOpen)` and wired deterministic back-navigation notifications in `UIInputRouter`.
 - Added `WindowStackBackNavigation` and integrated window-state notifications from `UIInputRouter` for close-top-panel behavior.
 - Added ESC back-navigation contract (`IUIBackNavigation`) and `UIInputRouter.TryHandleEscape()` priority (close modal before top panel).
 - Added `UIInputRouter` + `DefaultUIHotkeyResolver` to route raw key intents into hotkey toggles and respect modal input context.

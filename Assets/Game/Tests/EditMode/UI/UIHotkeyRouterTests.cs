@@ -12,6 +12,23 @@ namespace Game.Tests.EditMode.UI
         {
             Assert.Throws<System.ArgumentNullException>(() => new UIHotkeyRouter(null));
         }
+
+        [Test]
+        public void TryToggle_ReturnsWindowStateAfterToggle()
+        {
+            var registry = new WindowRegistry();
+            registry.Register(WindowId.Inventory, _ => { });
+            var router = new UIHotkeyRouter(new WindowManager(new WindowService(registry)));
+
+            Assert.True(router.TryToggle(UIHotkey.Inventory, out var windowId, out var isOpen));
+            Assert.AreEqual(WindowId.Inventory, windowId);
+            Assert.True(isOpen);
+
+            Assert.True(router.TryToggle(UIHotkey.Inventory, out windowId, out isOpen));
+            Assert.AreEqual(WindowId.Inventory, windowId);
+            Assert.False(isOpen);
+        }
+
         [Test]
         public void TryResolveWindow_UsesDefaultBindings_ForAtlasAndCraftHotkeys()
         {

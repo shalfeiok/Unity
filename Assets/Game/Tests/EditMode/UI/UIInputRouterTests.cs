@@ -47,6 +47,40 @@ namespace Game.Tests.EditMode.UI
         }
 
         [Test]
+        public void TryHandleToggleKey_NotifiesBackNavigation_OnSuccess()
+        {
+            var registry = new WindowRegistry();
+            registry.Register(WindowId.Inventory, _ => { });
+            var back = new BackNavigationStub(false, false, false);
+            var input = new UIInputRouter(
+                new InputContextStack(),
+                new UIHotkeyRouter(new WindowManager(new WindowService(registry))),
+                backNavigation: back);
+
+            Assert.True(input.TryHandleToggleKey("I"));
+            Assert.AreEqual(1, back.NotifyCalls);
+            Assert.AreEqual(WindowId.Inventory, back.LastWindowId);
+            Assert.True(back.LastIsOpen);
+        }
+
+        [Test]
+        public void TryHandleToggleKey_DoesNotNotifyBackNavigation_OnResolveFailure()
+        {
+            var registry = new WindowRegistry();
+            registry.Register(WindowId.Inventory, _ => { });
+            var back = new BackNavigationStub(false, false, false);
+            var resolver = new ConstantResolver(UIHotkey.None, shouldResolve: true);
+            var input = new UIInputRouter(
+                new InputContextStack(),
+                new UIHotkeyRouter(new WindowManager(new WindowService(registry))),
+                hotkeyResolver: resolver,
+                backNavigation: back);
+
+            Assert.False(input.TryHandleToggleKey("I"));
+            Assert.AreEqual(0, back.NotifyCalls);
+        }
+
+        [Test]
         public void TryHandleEscape_WhenModalOpen_ClosesModalFirst()
         {
             var back = new BackNavigationStub(hasModal: true, closeModalResult: true, closeTopPanelResult: true);
@@ -76,7 +110,6 @@ namespace Game.Tests.EditMode.UI
             Assert.AreEqual(1, back.CloseTopPanelCalls);
         }
 
-
         [Test]
         public void TryHandleEscape_WithWindowStackBackNavigation_ClosesLastToggledPanel()
         {
@@ -96,6 +129,24 @@ namespace Game.Tests.EditMode.UI
             Assert.False(service.IsOpen(WindowId.Inventory));
         }
 
+        private sealed class ConstantResolver : IUIHotkeyResolver
+        {
+            private readonly UIHotkey _hotkey;
+            private readonly bool _shouldResolve;
+
+            public ConstantResolver(UIHotkey hotkey, bool shouldResolve)
+            {
+                _hotkey = hotkey;
+                _shouldResolve = shouldResolve;
+            }
+
+            public bool TryResolve(string key, out UIHotkey hotkey)
+            {
+                hotkey = _hotkey;
+                return _shouldResolve;
+            }
+        }
+
         private sealed class BackNavigationStub : IUIBackNavigation
         {
             private readonly bool _hasModal;
@@ -104,6 +155,9 @@ namespace Game.Tests.EditMode.UI
 
             public int CloseModalCalls { get; private set; }
             public int CloseTopPanelCalls { get; private set; }
+            public int NotifyCalls { get; private set; }
+            public WindowId LastWindowId { get; private set; }
+            public bool LastIsOpen { get; private set; }
 
             public BackNavigationStub(bool hasModal, bool closeModalResult, bool closeTopPanelResult)
             {
@@ -128,6 +182,9 @@ namespace Game.Tests.EditMode.UI
 
             public void NotifyWindowState(WindowId windowId, bool isOpen)
             {
+                NotifyCalls++;
+                LastWindowId = windowId;
+                LastIsOpen = isOpen;
             }
         }
     }

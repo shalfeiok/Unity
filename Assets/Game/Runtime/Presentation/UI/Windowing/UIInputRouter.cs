@@ -29,13 +29,9 @@ namespace Game.Presentation.UI.Windowing
             if (!_hotkeyResolver.TryResolve(key, out var hotkey))
                 return false;
 
-            if (!_hotkeyRouter.TryResolveWindow(hotkey, out var windowId))
+            if (!_hotkeyRouter.TryToggle(hotkey, out var windowId, out var isOpen))
                 return false;
 
-            if (!_hotkeyRouter.TryToggle(hotkey))
-                return false;
-
-            var isOpen = _hotkeyRouter.IsOpen(windowId);
             _backNavigation.NotifyWindowState(windowId, isOpen);
             return true;
         }

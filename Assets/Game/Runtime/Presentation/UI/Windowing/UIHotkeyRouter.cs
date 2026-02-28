@@ -1,4 +1,5 @@
 using System;
+
 namespace Game.Presentation.UI.Windowing
 {
     public sealed class UIHotkeyRouter
@@ -14,10 +15,19 @@ namespace Game.Presentation.UI.Windowing
 
         public bool TryToggle(UIHotkey hotkey)
         {
-            if (!_bindings.TryGetWindow(hotkey, out var windowId))
+            return TryToggle(hotkey, out _, out _);
+        }
+
+        public bool TryToggle(UIHotkey hotkey, out WindowId windowId, out bool isOpen)
+        {
+            if (!_bindings.TryGetWindow(hotkey, out windowId))
+            {
+                isOpen = false;
                 return false;
+            }
 
             _windowManager.Toggle(windowId);
+            isOpen = _windowManager.IsOpen(windowId);
             return true;
         }
 
