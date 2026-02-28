@@ -38,6 +38,7 @@
 - `docs/WORKFLOW.md`
 - `docs/FILE_MAP.md`
 - `docs/PROGRESS.md` (журнал выполнения задач)
+- `docs/TASKS_AUDIT_REPORT.md` (аудит задач: выполнено/частично/не выполнено + статистика)
 
 ## 4) Исходник (для трассируемости)
 - `docs/SOURCE_ORIGINAL_PROMPT.md`

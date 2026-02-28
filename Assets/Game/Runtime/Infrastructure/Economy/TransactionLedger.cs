@@ -1,9 +1,10 @@
 using System;
 using System.Collections.Generic;
+using Game.Application.Abstractions;
 
 namespace Game.Infrastructure.Economy
 {
-    public sealed class TransactionLedger
+    public sealed class TransactionLedger : ITransactionLedger
     {
         private readonly List<LedgerEntry> _entries = new();
 

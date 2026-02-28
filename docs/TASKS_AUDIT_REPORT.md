@@ -8,9 +8,9 @@
 
 ## Сводная статистика
 - Всего проверено пунктов: **64**
-- ✅ Выполнено: **52**
-- ⚠️ Реализовано частично / иначе: **8**
-- ❌ Не выполнено: **4**
+- ✅ Выполнено: **55**
+- ⚠️ Реализовано частично / иначе: **7**
+- ❌ Не выполнено: **2**
 
 ---
 
@@ -35,7 +35,7 @@
 - ✅ Drag/focus/resize/dock реализованы.
 - ⚠️ Modal blocker есть как сервис, но click-through блокировка в реальном UI графе не подтверждена prefab/scene-артефактами.
 - ✅ UILayoutState + JSON save/restore реализованы.
-- ⚠️ Autosave на end-drag/end-resize/end-close не реализован как явный интеграционный хук.
+- ✅ Autosave hooks на end-drag/end-resize/end-close реализованы (`UILayoutAutoSaveHooks`).
 - ✅ InputContextStack + DragDropService + VirtualizedListView реализованы.
 - ✅ PlayMode `WindowingSmokeTests` добавлены.
 
@@ -64,7 +64,7 @@
 - ✅ Allocate/Refund passive use cases есть.
 - ✅ ApplyCurrencyAction (+ ledger) есть.
 - ✅ UseFlask use case есть.
-- ❌ UI events bus/publish для всех изменений как единая шина событий не реализованы.
+- ✅ Добавлена единая шина событий Application-уровня (`IApplicationEventPublisher`) и публикация в use cases.
 
 ## 6) UI окна PoE
 - ✅ Inventory/Character state/services добавлены.
@@ -78,7 +78,7 @@
 ## 7) Документация/прогресс
 - ✅ `docs/PROGRESS.md` пополнялся по коммитам.
 - ✅ `docs/FILE_MAP.md` обновлялся.
-- ❌ Новые спеки в `docs/INDEX.md` синхронизированы не полностью (точечная верификация полного соответствия не закрыта).
+- ✅ `docs/INDEX.md` синхронизирован и включает отчёт аудита задач.
 
 ## Definition of Done
 - ⚠️ Большинство функциональных блоков реализованы в виде кодовых заготовок + тестов, но часть требований закрыта частично (особенно UI prefab/scene-интеграция и полнота боевого pipeline).

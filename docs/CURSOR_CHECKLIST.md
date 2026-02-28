@@ -124,7 +124,7 @@
 - [x] Allocate/Respec Passive UseCases
 - [x] ApplyCurrencyActionUseCase (+ ledger)
 - [x] UseFlaskUseCase
-- [ ] UI events published for all changes
+- [x] UI events published for all changes
 
 ---
 
@@ -146,7 +146,7 @@ PlayMode smoke:
 ## 7) Документация/прогресс
 - [x] На каждый коммит добавлена строка в `docs/PROGRESS.md`
 - [x] `docs/INDEX.md` и `docs/FILE_MAP.md` обновлены при добавлении файлов
-- [ ] Новые спеки добавлены в `docs/INDEX.md`
+- [x] Новые спеки добавлены в `docs/INDEX.md`
 
 ---
 

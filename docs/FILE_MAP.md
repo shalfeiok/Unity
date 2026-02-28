@@ -15,6 +15,7 @@
     - Flasks/ — модель фласок и сервис зарядов/использования.
 - Application/ — use cases, сервисы сценариев: equip/cast/generate/save.
   - Transactions/ — transaction runner, idempotency и orchestration use case pipeline.
+  - Events/ — шина application-событий (publish после успешных use case операций).
   - Poe/UseCases/ — PoE сценарии: gem/passive/flask/currency operations (вкл. InsertGem/RemoveGem/RefundPassive).
   - UI/UseCases/ — прикладные UI операции (например, hotbar assignment).
 - Presentation/ — Unity сцены, MonoBehaviours, UI Views, Input, NavMesh, VFX/Anim.
@@ -26,6 +27,7 @@
   - UI/Hud/ — HUD сервисы (hotbar bindings и боевые индикаторы).
     - Flasks/ — flask belt HUD состояние и обновление charges/usability.
     - Interactions/ — drag/focus/modal/resize/dock и layout persistence helpers.
+    - Layout autosave hooks/ — автосохранение layout на завершении drag/resize/close.
     - Input/ — input context stack, drag&drop payload service, virtualized list view.
   - Common/ — инфраструктурные клиентские утилиты (например, object pooling).
   - World/ — world-actors для лута и других in-world presentation сущностей.
