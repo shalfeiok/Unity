@@ -7,6 +7,7 @@ namespace Game.Presentation.UI.Windowing
         Character = 2,
         Skills = 3,
         Craft = 4,
-        PassiveTree = 5
+        PassiveTree = 5,
+        Atlas = 6
     }
 }

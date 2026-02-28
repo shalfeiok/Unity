@@ -75,3 +75,14 @@
 - 2026-02-28: Расширено тестовое покрытие `UiEventLogService` для detailed payload-сообщений `FlaskUsed` и `GemRemoved` (RU formatting + event payload mapping).
 - 2026-02-28: `UiEventLogService` расширен detailed RU-сообщениями для passive/hotbar событий (allocate/refund/assign/unassign) с payload-aware fallback; добавлены EditMode тесты на форматирование.
 - 2026-02-28: Доведено покрытие `UiEventLogServiceTests` до полной пары событий passive (allocate/refund) и добавлен explicit fallback-тест для `HotbarAssigned` при неполном payload.
+- 2026-02-28: Добавлен PlayMode тест `UITogglesSmokeTest` (toggle I/C/P/S/K/O/M + service-level vertical smoke: hotbar assign, passive allocate, craft preview/commit), а также сгенерированы верхнеуровневые отчёты `SUMMARY_IMPLEMENTATION_REPORT.md`, `ARCHITECTURE_OVERVIEW.md`, `SYSTEM_DEPENDENCY_GRAPH.md`, `BALANCE_GUIDELINES.md`, `CHANGELOG.md`.
+
+- 2026-02-28: Улучшен hotkey слой UI: добавлены `UIHotkey`/`UIHotkeyRouter`, расширен `WindowId` значением `Atlas`, обновлён PlayMode `UITogglesSmokeTest` на production-маршрутизацию и добавлены EditMode тесты `UIHotkeyRouterTests`.
+- 2026-02-28: Refactor hotkeys в data-driven стиль: добавлены `IUIHotkeyBindings` и `DefaultUIHotkeyBindings`, `UIHotkeyRouter` переведён на инъекцию биндингов; обновлены EditMode/PlayMode тесты под новую точку расширения.
+- 2026-02-28: Добавлен `UIInputRouter` и `DefaultUIHotkeyResolver`; hotkey smoke переведён на обработку реальных key-intents (`I/C/P/S/K/O/M`) через input-layer с учётом `InputContext.Modal`.
+- 2026-02-28: Добавлен back-navigation контракт `IUIBackNavigation` (+ `NullUIBackNavigation`) и логика `UIInputRouter.TryHandleEscape()` с приоритетом закрытия modal -> top panel; расширены EditMode тесты UI input/router.
+- 2026-02-28: Добавлена реализация `WindowStackBackNavigation` и интеграция уведомлений о состоянии окон из `UIInputRouter`; Esc теперь может закрывать фактически верхнюю панель по стеку открытий.
+- 2026-02-28: `UIHotkeyRouter` переведён на state-aware toggle (out `windowId`/`isOpen`), `UIInputRouter` уведомляет back-navigation только после успешного toggling; расширены EditMode тесты на notify/failure-path.
+- 2026-02-28: Добавлены lifecycle-хуки `UIInputRouter.OnModalOpened/OnModalClosed`; контракт back-navigation расширен методами `EnterModal/ExitModal`, синхронизированы тесты и стековая реализация.
+- 2026-02-28: Исправлен edge-case Esc: `UIInputRouter.TryHandleEscape()` теперь снимает `InputContext.Modal` после успешного закрытия модалки; добавлен EditMode тест на pop modal context.
+- 2026-02-28: Синхронизирован `InputContextStack` с panel stack: `UIInputRouter` переводит Gameplay->UI при открытии первой панели и UI->Gameplay при закрытии последней (toggle/Esc).
