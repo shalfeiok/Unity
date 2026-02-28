@@ -46,6 +46,9 @@ ScriptableObject definitions будут в `Assets/Game/Runtime/Presentation/Dat
 ## Assets/Game/Tests/EditMode
 Юнит-тесты домена: stat math, determinism, budget validator, anti-exploit guards.
 
+## Assets/Game/Tests/PlayMode
+Smoke/интеграционные тесты UI и пользовательских сценариев (dragdrop/passive/craft и т.п.).
+
 ## docs/
 Документация, прогресс, чек-листы, матрицы.
 
