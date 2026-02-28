@@ -8,6 +8,10 @@
   - Combat/ — breakdown-модели (например, DamageBreakdown).
   - Loot/ — генерация drop-таблиц и детерминированный world loot pipeline.
   - Poe/ — PoE-ориентированные модели itemization/skills/passives/flasks/crafting.
+    - Items/ — базы, пулы модов, генератор предметов, селектор и роллы.
+    - Sockets+Gems/ — линковка сокетов, skill/support gems и компиляция билда.
+    - Passives/ — дерево пассивов, аллокация/рефанд и правила связности.
+    - Flasks/ — модель фласок и сервис зарядов/использования.
 - Application/ — use cases, сервисы сценариев: equip/cast/generate/save.
 - Presentation/ — Unity сцены, MonoBehaviours, UI Views, Input, NavMesh, VFX/Anim.
   - UI/Windowing/ — базовый windowing framework и планировщик UI refresh.

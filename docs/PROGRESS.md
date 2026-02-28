@@ -31,3 +31,6 @@
 - 2026-02-28: Добавлены InputContextStack (Gameplay/UI/ChatTyping/Modal), DragDropService (ItemRef/GemRef/SkillRef/CurrencyRef), VirtualizedListView<T> и EditMode тесты.
 - 2026-02-28: Реализован старт D3-like loot loop: Domain LootGenerator/LootDrop/LootRarity (детерминированный drop), Presentation LootWorldActor/LootLabel и LootAltToggle + EditMode тесты по детерминизму и ALT visibility.
 - 2026-02-28: Начат блок PoE itemization: ItemBaseDefinition/ModDefinition, ModPoolSelector, PoeItemGenerator и ModPoolValidator + EditMode тесты (caps 3/3, deterministic seed, ilvl gating, duplicate mod ids).
+- 2026-02-28: Реализован блок PoE gems/links: SocketModel/LinkGroup, SkillGemDefinition/SupportGemDefinition/GemInstance, SkillBuildCompiler (applied/rejected + deterministic ordering) и EditMode тесты.
+- 2026-02-28: Реализован блок Passive Tree: PassiveTreeDefinition, PassiveTreeService (allocate/refund with connectivity checks), PassiveTreeValidator и EditMode тесты.
+- 2026-02-28: Реализован блок Flasks: FlaskDefinition, FlaskService (charges/use/gain clamp) и EditMode тесты.
