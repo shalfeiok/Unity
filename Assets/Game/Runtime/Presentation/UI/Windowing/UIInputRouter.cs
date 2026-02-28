@@ -39,7 +39,13 @@ namespace Game.Presentation.UI.Windowing
         public bool TryHandleEscape()
         {
             if (_backNavigation.HasModal())
-                return _backNavigation.TryCloseModal();
+            {
+                var closedModal = _backNavigation.TryCloseModal();
+                if (closedModal && _contextStack.Current == InputContext.Modal)
+                    _contextStack.Pop();
+
+                return closedModal;
+            }
 
             if (_contextStack.Current == InputContext.UI || _contextStack.Current == InputContext.Modal)
                 return _backNavigation.TryCloseTopPanel();

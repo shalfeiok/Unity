@@ -30,7 +30,7 @@ namespace Game.Tests.EditMode.UI
             contexts.Push(InputContext.Modal);
             var input = new UIInputRouter(contexts, new UIHotkeyRouter(manager));
 
-            Assert.False(input.TryHandleToggleKey("I"));
+            Assert.True(input.TryHandleToggleKey("I"));
             Assert.False(service.IsOpen(WindowId.Inventory));
         }
 
@@ -92,6 +92,25 @@ namespace Game.Tests.EditMode.UI
             Assert.True(input.TryHandleEscape());
             Assert.AreEqual(1, back.CloseModalCalls);
             Assert.AreEqual(0, back.CloseTopPanelCalls);
+        }
+
+
+        [Test]
+        public void TryHandleEscape_WhenClosingModal_PopsModalContext()
+        {
+            var registry = new WindowRegistry();
+            registry.Register(WindowId.Inventory, _ => { });
+            var contexts = new InputContextStack();
+            contexts.Push(InputContext.Modal);
+            var back = new BackNavigationStub(hasModal: true, closeModalResult: true, closeTopPanelResult: false);
+            var input = new UIInputRouter(
+                contexts,
+                new UIHotkeyRouter(new WindowManager(new WindowService(registry))),
+                backNavigation: back);
+
+            Assert.True(input.TryHandleEscape());
+            Assert.AreEqual(InputContext.Gameplay, contexts.Current);
+            Assert.True(input.TryHandleToggleKey("I"));
         }
 
         [Test]
@@ -169,7 +188,7 @@ namespace Game.Tests.EditMode.UI
 
         private sealed class BackNavigationStub : IUIBackNavigation
         {
-            private readonly bool _hasModal;
+            private int _modalDepth;
             private readonly bool _closeModalResult;
             private readonly bool _closeTopPanelResult;
 
@@ -183,16 +202,19 @@ namespace Game.Tests.EditMode.UI
 
             public BackNavigationStub(bool hasModal, bool closeModalResult, bool closeTopPanelResult)
             {
-                _hasModal = hasModal;
+                _modalDepth = hasModal ? 1 : 0;
                 _closeModalResult = closeModalResult;
                 _closeTopPanelResult = closeTopPanelResult;
             }
 
-            public bool HasModal() => _hasModal;
+            public bool HasModal() => _modalDepth > 0;
 
             public bool TryCloseModal()
             {
                 CloseModalCalls++;
+                if (_closeModalResult && _modalDepth > 0)
+                    _modalDepth--;
+
                 return _closeModalResult;
             }
 
@@ -212,11 +234,14 @@ namespace Game.Tests.EditMode.UI
             public void EnterModal()
             {
                 EnterModalCalls++;
+                _modalDepth++;
             }
 
             public void ExitModal()
             {
                 ExitModalCalls++;
+                if (_modalDepth > 0)
+                    _modalDepth--;
             }
         }
     }

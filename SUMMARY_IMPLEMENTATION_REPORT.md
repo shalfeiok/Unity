@@ -1,6 +1,7 @@
 # SUMMARY_IMPLEMENTATION_REPORT
 
 ## Что добавлено в этом обновлении
+- Исправлена синхронизация контекста при Esc: при успешном `TryCloseModal()` роутер снимает `InputContext.Modal`, чтобы не оставаться в «залипшем» modal-состоянии ввода.
 - В `UIInputRouter` добавлен lifecycle API для модалок: `OnModalOpened()` / `OnModalClosed()` с синхронизацией `InputContextStack` и back-navigation depth.
 - `UIHotkeyRouter` получил атомарный `TryToggle(..., out windowId, out isOpen)`, чтобы `UIInputRouter` уведомлял back-navigation только после успешного toggling с фактическим состоянием окна.
 - Добавлена production-реализация `WindowStackBackNavigation`, которая ведёт стек открытых окон и закрывает верхнюю панель по Esc.
