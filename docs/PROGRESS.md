@@ -26,3 +26,6 @@
 - 2026-02-28: Реализована Modifier Algebra v2: новые buckets (Add/Increased/More/Conversion/Cap), provenance-упорядочивание conversion по sourceId, интеграция в StatSheet и DamageBreakdown + EditMode тесты (sum increased / multiply more / stable conversion order).
 - 2026-02-28: Добавлены базовые perf-инструменты: UIRefreshScheduler (budgeted batching), generic ObjectPool<T>, PerfBudgetSettings/Provider для загрузки бюджетов из Resources + EditMode тесты scheduler/pool.
 - 2026-02-28: Старт windowing framework: добавлены WindowId, WindowRegistry, IWindowService/WindowService, WindowManager, WindowRoot (MonoBehaviour) и EditMode тест на open/close state.
+- 2026-02-28: Добавлены window interactions: WindowDragMove (canvas-scale aware), WindowFocusController, WindowModalBlocker, WindowResize, WindowDockSnap + EditMode тесты на drag/resize/snap/focus/modal.
+- 2026-02-28: Добавлены UILayoutState/UILayoutPersistence и Infrastructure persistence слой (JsonStorage + UILayoutRepository) с тестом save/load roundtrip.
+- 2026-02-28: Добавлены InputContextStack (Gameplay/UI/ChatTyping/Modal), DragDropService (ItemRef/GemRef/SkillRef/CurrencyRef), VirtualizedListView<T> и EditMode тесты.
