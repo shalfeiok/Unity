@@ -8,8 +8,8 @@
 
 ## Сводная статистика
 - Всего проверено пунктов: **64**
-- ✅ Выполнено: **55**
-- ⚠️ Реализовано частично / иначе: **7**
+- ✅ Выполнено: **57**
+- ⚠️ Реализовано частично / иначе: **5**
 - ❌ Не выполнено: **2**
 
 ---
@@ -43,7 +43,7 @@
 - ✅ LootGenerator есть.
 - ✅ World loot actor + labels есть.
 - ⚠️ ALT toggle реализован; визуальные beams/colors в полном виде не реализованы (базовый placeholder).
-- ⚠️ Pickup transaction + inventory update в полном e2e pipeline не выделен отдельным use case/смоуком.
+- ✅ Добавлен PickupLootUseCase (transaction + inventory update + event publish) и покрыт EditMode тестом.
 
 ## 4) PoE Core
 - ⚠️ ItemBaseDefinition присутствует, но implicits как отдельная модель/поток выделены ограниченно.
@@ -53,7 +53,7 @@
 - ✅ Socket/Gems/Compiler есть.
 - ⚠️ SkillBuildCompiler Explain breakdown реализован частично (applied/rejected reasons есть, расширенный explain-профиль отсутствует).
 - ✅ Passive tree allocation/respec connectivity есть.
-- ⚠️ Search index (name/tag) для passive tree отдельно не выделен.
+- ✅ Добавлен PassiveTreeSearchIndex с поиском по id/name/tags.
 - ✅ Flask charges rules есть.
 - ⚠️ Flask effects via Modifier v2 в явном интеграционном виде отсутствуют.
 - ✅ Currency actions + deterministic craft RNG + ledger entry есть.

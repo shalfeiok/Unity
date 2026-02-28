@@ -10,6 +10,7 @@ namespace Game.Application.Events
         CurrencyApplied = 5,
         FlaskUsed = 6,
         HotbarAssigned = 7,
-        HotbarUnassigned = 8
+        HotbarUnassigned = 8,
+        LootPickedUp = 9
     }
 }

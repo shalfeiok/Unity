@@ -22,19 +22,13 @@ namespace Game.Presentation.UI.Windows.PassiveTree
             state.SearchQuery = query ?? string.Empty;
             state.HighlightedNodeIds.Clear();
 
-            if (string.IsNullOrWhiteSpace(state.SearchQuery))
+            if (string.IsNullOrWhiteSpace(state.SearchQuery) || tree == null)
                 return Array.Empty<string>();
 
-            var result = new List<string>();
-            for (int i = 0; i < tree.Nodes.Count; i++)
-            {
-                var id = tree.Nodes[i].Id;
-                if (id != null && id.IndexOf(state.SearchQuery, StringComparison.OrdinalIgnoreCase) >= 0)
-                {
-                    state.HighlightedNodeIds.Add(id);
-                    result.Add(id);
-                }
-            }
+            var index = new PassiveTreeSearchIndex(tree);
+            var result = index.Search(state.SearchQuery);
+            for (int i = 0; i < result.Count; i++)
+                state.HighlightedNodeIds.Add(result[i]);
 
             return result;
         }

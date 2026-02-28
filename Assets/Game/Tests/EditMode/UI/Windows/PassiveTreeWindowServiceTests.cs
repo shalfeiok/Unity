@@ -36,16 +36,20 @@ namespace Game.Tests.EditMode.UI.Windows
         public void Search_HighlightsMatchingNodes_AndPreviewSelectsExistingNode()
         {
             var tree = new PassiveTreeDefinition();
-            tree.Nodes.Add(new PassiveNodeDefinition { Id = "life_small" });
-            tree.Nodes.Add(new PassiveNodeDefinition { Id = "life_big" });
-            tree.Nodes.Add(new PassiveNodeDefinition { Id = "crit_small" });
+            tree.Nodes.Add(new PassiveNodeDefinition { Id = "life_small", Name = "Small Life", Tags = new System.Collections.Generic.List<string> { "life" } });
+            tree.Nodes.Add(new PassiveNodeDefinition { Id = "life_big", Name = "Big Life", Tags = new System.Collections.Generic.List<string> { "defense" } });
+            tree.Nodes.Add(new PassiveNodeDefinition { Id = "crit_small", Name = "Critical Chance", Tags = new System.Collections.Generic.List<string> { "critical" } });
 
             var state = new PassiveTreeWindowState();
             var service = new PassiveTreeWindowService();
 
-            var result = service.Search(state, tree, "life");
+            var result = service.Search(state, tree, "critical");
 
-            Assert.AreEqual(2, result.Count);
+            Assert.AreEqual(1, result.Count);
+            Assert.True(state.HighlightedNodeIds.Contains("crit_small"));
+
+            var lifeResult = service.Search(state, tree, "life");
+            Assert.AreEqual(2, lifeResult.Count);
             Assert.True(state.HighlightedNodeIds.Contains("life_small"));
             Assert.True(service.SetPreviewNode(state, tree, "life_big"));
             Assert.AreEqual("life_big", state.PreviewNodeId);

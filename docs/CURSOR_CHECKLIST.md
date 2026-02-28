@@ -72,7 +72,7 @@
 - [x] LootGenerator (D3 профили)
 - [x] World loot actors + pooled labels
 - [x] ALT show toggle + highlight beams/colors (текстом/простыми объектами)
-- [ ] Pickup transaction + inventory update
+- [x] Pickup transaction + inventory update
 - [ ] Tests: loot smoke
 
 ---
@@ -98,7 +98,7 @@
 - [x] PassiveTreeDefinition graph (nodes/edges/positions)
 - [x] Allocation rules (adjacency)
 - [x] Respec connectivity validator
-- [ ] Search index (name/tag)
+- [x] Search index (name/tag)
 
 ### 4.4 Flasks
 - [x] Flask charges spend/gain rules
