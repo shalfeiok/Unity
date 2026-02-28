@@ -20,6 +20,12 @@ namespace Game.Presentation.UI.Localization
                 ["rarity.magic"] = "Магический",
                 ["rarity.rare"] = "Редкий",
                 ["rarity.legendary"] = "Легендарный",
+                ["tooltip.skill.title"] = "Навык: {0}",
+                ["tooltip.skill.applied_count"] = "Применённых поддержек: {0}",
+                ["tooltip.section.applied_supports"] = "Применённые поддержки",
+                ["tooltip.section.rejected_supports"] = "Отклонённые поддержки",
+                ["tooltip.skill.applied_line"] = "{0} (приоритет {1})",
+                ["tooltip.skill.rejected_line"] = "{0}: {1}; отсутствуют теги: {2}",
                 ["ui.error.precondition"] = "Действие недоступно: условия не выполнены"
             };
         }

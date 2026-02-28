@@ -65,3 +65,5 @@
 - 2026-02-28: Добавлен `docs/UI_FULL_IMPLEMENTATION_REPORT_RU.md` с полным реестром UI-функций, hotkeys, тестового прогона и задач A–K с фиксацией доступных/заблокированных пунктов текущего snapshot.
 
 - 2026-02-28: Добавлен базовый RU localization/tooltip слой UI: `DictionaryLocalizationService` + `RussianUiStrings`, `ItemTooltipBuilder` и EditMode тесты локализации/подсказок для предметов.
+
+- 2026-02-28: Добавлен `SkillExplainTooltipBuilder` (RU-подсказки по explain-профилю скилла: применённые/отклонённые supports и missing tags), расширен словарь `RussianUiStrings`, добавлен EditMode тест билдера.
