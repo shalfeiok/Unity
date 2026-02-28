@@ -33,16 +33,16 @@ namespace Game.Presentation.UI.Feedback
         {
             var message = appEvent.Type switch
             {
-                ApplicationEventType.GemInserted => _loc.Translate("event.gem_inserted"),
-                ApplicationEventType.GemRemoved => _loc.Translate("event.gem_removed"),
-                ApplicationEventType.PassiveAllocated => _loc.Translate("event.passive_allocated"),
-                ApplicationEventType.PassiveRefunded => _loc.Translate("event.passive_refunded"),
-                ApplicationEventType.CurrencyApplied => _loc.Translate("event.currency_applied"),
-                ApplicationEventType.FlaskUsed => _loc.Translate("event.flask_used"),
-                ApplicationEventType.HotbarAssigned => _loc.Translate("event.hotbar_assigned"),
-                ApplicationEventType.HotbarUnassigned => _loc.Translate("event.hotbar_unassigned"),
-                ApplicationEventType.LootPickedUp => _loc.Translate("event.loot_picked_up"),
-                _ => _loc.Translate("event.unknown")
+                ApplicationEventType.GemInserted => Translate("event.gem_inserted"),
+                ApplicationEventType.GemRemoved => Translate("event.gem_removed"),
+                ApplicationEventType.PassiveAllocated => Translate("event.passive_allocated"),
+                ApplicationEventType.PassiveRefunded => Translate("event.passive_refunded"),
+                ApplicationEventType.CurrencyApplied => Translate("event.currency_applied"),
+                ApplicationEventType.FlaskUsed => Translate("event.flask_used"),
+                ApplicationEventType.HotbarAssigned => Translate("event.hotbar_assigned"),
+                ApplicationEventType.HotbarUnassigned => Translate("event.hotbar_unassigned"),
+                ApplicationEventType.LootPickedUp => Translate("event.loot_picked_up"),
+                _ => Translate("event.unknown")
             };
 
             Add(message, appEvent.TimestampUtc);
@@ -56,6 +56,11 @@ namespace Game.Presentation.UI.Feedback
                 return;
 
             _entries.RemoveRange(0, overflow);
+        }
+
+        private string Translate(string key)
+        {
+            return _loc == null ? key : _loc.Translate(key);
         }
     }
 }

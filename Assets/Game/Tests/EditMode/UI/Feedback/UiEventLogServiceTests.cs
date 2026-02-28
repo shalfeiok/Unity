@@ -48,5 +48,15 @@ namespace Game.Tests.EditMode.UI.Feedback
             Assert.AreEqual("Ошибка", service.Entries[0].Message);
             Assert.LessOrEqual(Math.Abs((DateTime.UtcNow - service.Entries[0].TimestampUtc).TotalSeconds), 3d);
         }
+
+        [Test]
+        public void Publish_WithoutLocalization_FallsBackToKey()
+        {
+            var service = new UiEventLogService(null);
+            service.Publish(new ApplicationEvent(ApplicationEventType.CurrencyApplied, "op_2"));
+
+            Assert.AreEqual(1, service.Entries.Count);
+            Assert.AreEqual("event.currency_applied", service.Entries[0].Message);
+        }
     }
 }
